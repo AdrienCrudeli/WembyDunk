@@ -62,26 +62,28 @@ public class Deplacements {
 		}
 	}
 
-	public KeyAdapter getKeyAdapter() {
-		return new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				int keyCode = e.getKeyCode();
-				if (keyCode == KeyEvent.VK_LEFT)
-					seDeplacerGauche();
-				else if (keyCode == KeyEvent.VK_RIGHT)
-					seDeplacerDroite();
-				else if (keyCode == KeyEvent.VK_UP)
-					sauter();
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				int keyCode = e.getKeyCode();
-				if (keyCode == KeyEvent.VK_RIGHT && enSaut) {
-					lancerBallon();
-				}
-			}
-		};
+	public int getHauteurSaut() {
+		return hauteurSaut;
 	}
+
+	public void setHauteurSaut(int hauteurSaut) {
+		this.hauteurSaut = hauteurSaut;
+	}
+
+	public boolean isEnSaut() {
+		return enSaut;
+	}
+
+	public void setEnSaut(boolean enSaut) {
+		this.enSaut = enSaut;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
 }
