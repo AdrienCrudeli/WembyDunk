@@ -1,87 +1,98 @@
 import javax.swing.ImageIcon;
 
 public class Ballon {
-    private ImageIcon imageBallon;
-    private int largeur, hauteur;
-	private double x, y;
-	private double vitesseX, vitesseY, mu;
 	
-    public Ballon(int largeur, int hauteur, int x, int y, double vitesseX, double vitesseY, double mu) {
-        this.largeur = largeur;
-        this.hauteur = hauteur;
-		this.x = 0;
-		this.y = 0;
-		this.vitesseX = 20;
-		this.vitesseY = -15;
-		this.mu = 0.8;
-        this.imageBallon = new ImageIcon("ballon.png");
+	//Initialisation
+    public ImageIcon imageBallon = new ImageIcon("Ballon.png"); //Image importé pointée via nom de fichier
+	public int x = 0; //Position Ballon
+	public int y = 0;
+	public double vitesseX = 0; //Vitesse Ballon instant t
+	public double vitesseY = 0;
+	public double u = 0; //Coefficient viscosité dynamique
+	public double diamètre = 24.19*Math.pow(10, -2); //Diamètre du Ballon
+	
+	
+    public Ballon(int a_x,int a_y,double a_vitesseX,double a_vitesseY,double a_u,double a_diamètre,String a_fichier) { //constructeur
+    	
+        x=a_x;
+        y=a_y;
+        vitesseX=a_vitesseX;
+        vitesseY=a_vitesseY;
+        u=a_u;
+        diamètre = a_diamètre;
+        this.imageBallon = new ImageIcon(a_fichier);
     }
+//assesseurs
 
-    public ImageIcon getImage() {
-        return imageBallon;
-    }
-
-    public int getLargeur() {
-        return largeur;
-    }
-
-    public ImageIcon getImageBallon() {
+	public ImageIcon getImageBallon() {
 		return imageBallon;
 	}
+
 
 	public void setImageBallon(ImageIcon imageBallon) {
 		this.imageBallon = imageBallon;
 	}
 
-	public double getX() {
+
+	public int getX() {
 		return x;
 	}
 
-	public void setX(double x) {
+
+	public void setX(int x) {
 		this.x = x;
 	}
 
-	public double getY() {
+
+	public int getY() {
 		return y;
 	}
 
-	public void setY(double y) {
+
+	public void setY(int y) {
 		this.y = y;
 	}
+
 
 	public double getVitesseX() {
 		return vitesseX;
 	}
 
+
 	public void setVitesseX(double vitesseX) {
 		this.vitesseX = vitesseX;
 	}
+
 
 	public double getVitesseY() {
 		return vitesseY;
 	}
 
+
 	public void setVitesseY(double vitesseY) {
 		this.vitesseY = vitesseY;
 	}
 
-	public double getMu() {
-		return mu;
+
+	public double getU() {
+		return u;
 	}
 
-	public void setMu(double mu) {
-		this.mu = mu;
+
+	public void setU(double u) {
+		this.u = u;
 	}
 
-	public void setLargeur(int largeur) {
-		this.largeur = largeur;
+
+	public double getDiamètre() {
+		return diamètre;
 	}
 
-	public void setHauteur(int hauteur) {
-		this.hauteur = hauteur;
-	}
 
-	public int getHauteur() {
-        return hauteur;
-    }
+	public void setDiamètre(double diamètre) {
+		this.diamètre = diamètre;
+	}
+    
 }
+
+
