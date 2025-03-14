@@ -152,7 +152,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 		if (charPosY>screenHeight-110) { //impose ligne collision
 			charPosY=screenHeight-106;
 		}
-		System.out.println(charVit);
+
 //Partie Ballon
 		
 		
