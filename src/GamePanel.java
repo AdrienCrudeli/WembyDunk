@@ -97,11 +97,12 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	}
 	public void update() { //classe qui met à jour
 		//Partie joueur
-		boolean injump =false;
+		boolean injump = false; 
 		if (keyH.qPressed == true) {
 
 			charPosX -= charVit;
 		}
+		
 		if(keyH.sPressed) {
 			charPosY += charVit;
 
@@ -130,7 +131,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 		}
 		if(charPosY>=screenHeight-100) {
 			gravity=initGravity;
-	
+
 		}
 		if (injump) {
 			charPosY-=(jump);
@@ -153,12 +154,15 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 			charPosY=screenHeight-106;
 		}
 
+	}
+	
+
 //Partie Ballon
 		
 		
 		
 
-	}
+
 	public void paintComponent(Graphics g) { //classe qui repaint
 		super.paintComponent(g); //classe parental
 		Graphics2D g2 = (Graphics2D)g;

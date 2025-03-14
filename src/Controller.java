@@ -4,6 +4,7 @@ import java.awt.event.KeyListener;
 public class Controller{
 
 	//variable initiale
+	
 	public int initPosX =0;
 	public int initPosY = 0;
 	public double initVitY = 0;

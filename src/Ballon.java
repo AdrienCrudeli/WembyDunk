@@ -21,7 +21,10 @@ public class Ballon {
         u=a_u;
         diamètre = a_diamètre;
         this.imageBallon = new ImageIcon(a_fichier);
+        
     }
+    
+   
 //assesseurs
 
 	public ImageIcon getImageBallon() {

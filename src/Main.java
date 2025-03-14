@@ -2,6 +2,12 @@ import javax.swing.*;
 
 public class Main {
 	public static void main(String[] args) {
+		
+		Vecteur v= new Vecteur(1,1);
+		int[] a = new int[2] ;
+		a[0]=1;
+		a[1]=1;
+		System.out.println(v.toString(v.addition(a)));
 
 		//affichage basique en x,y, notez qu'il faudra faire de la composition comme le tuto, on s'en sert juste pour testes
 		JFrame window = new JFrame(); //on crée la fenêtre d'affichage
