@@ -27,6 +27,15 @@ public class PlayerData {
 	final int screenWidth = tileSize * maxScreenColumn;
 	
 	final int screenHeight = tileSize * maxScreenRow;
+	
+
+	public PlayerData(int charPosX, int charPosY, int charVit, int jump) {
+		super();
+		this.charPosX = charPosX;
+		this.charPosY = charPosY;
+		this.charVit = charVit;
+		this.jump = jump;
+	}
 
 	public int getCharPosX() {
 		return charPosX;

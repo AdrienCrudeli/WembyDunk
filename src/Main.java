@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Main {
 	public static void main(String[] args) {
 		
-		Vecteur v= new Vecteur(1,1);
+		Vector v= new Vector(1,1);
 		int[] a = new int[2] ;
 		a[0]=1;
 		a[1]=1;
