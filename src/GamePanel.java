@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	public double accJump=5;
 	public double gravity=initGravity;
 	
-	boolean injump = false; 
+	boolean injump =false;
 	boolean asBeenPressed = false;
 
 	//joueur
@@ -104,12 +104,15 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	}
 	public void update() { //classe qui met à jour
 		//Partie joueur
-		
-		
+
+		boolean injump = false; 
 		if (keyH.qPressed == true) {
-			
 
 			charPosX -= charVit;
+		}
+		
+		if(keyH.sPressed) {
+			charPosY += charVit;
 
 		}
 		if (keyH.dPressed) {
@@ -140,6 +143,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 		}
 		if (injump) {
 			charPosY-=(jump);
+			System.out.println(jump);
 			
 			
 			if (jump>0) {
@@ -159,7 +163,11 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 		}
 
 	}
-	
+		if (charPosY>screenHeight-110) { //impose ligne collision
+			charPosY=screenHeight-106;
+		}
+
+	}	
 
 //Partie Ballon
 		
