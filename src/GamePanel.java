@@ -38,7 +38,14 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	public double accGravity = 1;
 	public double accJump=5;
 	public double gravity=initGravity;
+	
+	boolean injump = false; 
+	boolean asBeenPressed = false;
 
+	//joueur
+	
+	double[] charPos = new double[2];
+	PlayerData joueur1 = new PlayerData(charPos, charVit, jump,2,accJump);
 
 	public GamePanel() {
 		System.out.println("started");
@@ -97,14 +104,12 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	}
 	public void update() { //classe qui met à jour
 		//Partie joueur
-		boolean injump = false; 
+		
+		
 		if (keyH.qPressed == true) {
+			
 
 			charPosX -= charVit;
-		}
-		
-		if(keyH.sPressed) {
-			charPosY += charVit;
 
 		}
 		if (keyH.dPressed) {
@@ -135,7 +140,6 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 		}
 		if (injump) {
 			charPosY-=(jump);
-			System.out.println(jump);
 			
 			
 			if (jump>0) {

@@ -1,40 +1,35 @@
 
 public class Vector {
 
-	public int x;
-	public int y;
+	public double x;
+	public double y;
 
-	public Vector(int x, int y) {
+	
+
+	public Vector(double x, double y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
+	
 
-	public int[] addition(int[] v1) {
-		int[] v = new int[2] ;
-		v[0]=x+v1[0];
-		v[1]=y+v1[1];
+	public Vector addition(Vector v1) {
+		Vector v = new Vector(x+v1.getX() , y+v1.getY());
 		return v;
 
 	}
 
-	public String toString(int[] v1) {
-		return ""+v1[0]+","+v1[1];
+	public String toString(Vector v1) {
+		return ""+v1.getX()+","+v1.getY();
 	}
 
-	public int[] lambda(double y) {
-
-		int[] v = new int[2] ;
-		v[0]*=y;
-		v[1]*=y;
+	public Vector lambda(double l) {
+		Vector v = new Vector(x*y,y*l);
 		return v;
 	}
 	
-	public int[] scalar(int[] v1) {
-
-		int[] v = new int[2] ;
-		v[0] = x*v1[0];
-		v[1] = y*v1[1];
+	public Vector scalar(Vector v1) {
+		Vector v = new Vector(x*v1.getX(),y*v1.getY()) ;
 		return v;
 	}
 	public double norme() {
@@ -45,5 +40,37 @@ public class Vector {
 	public double distance(int[] v1,int [] v2) {
 		return Math.pow(Math.pow(v2[0]-v1[0], 2)+Math.pow(v2[1]-v1[1], 2),0.5);
 	}
+	public double[] toTab() {
+		double[] v = new double[2] ;
+		v[0] = x;
+		v[1] = y;
+		return v;
+		
+	}
+
+	//assesseurs
+	
+	public double getX() {
+		return x;
+	}
+
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+
+
+	public double getY() {
+		return y;
+	}
+
+
+	public void setY(double y) {
+		this.y = y;
+	}
+	
+
+	
 	
 }

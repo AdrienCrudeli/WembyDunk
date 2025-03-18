@@ -23,14 +23,6 @@ public class Controller{
 
 
 
-
-
-
-
-
-
-
-
 		//assesseurs
 		public int getInitPosX() {
 			return initPosX;
