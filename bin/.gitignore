@@ -12,6 +12,8 @@
 /Controller.class
 /GamePanel.class
 /KeyHandler.class
+/Panier.class
+/Basket.class
 /BallonMoovSet.class
 /Player.class
 /PlayerMoovset.class
