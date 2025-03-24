@@ -47,6 +47,16 @@ public class Vector {
 		return v;
 		
 	}
+	
+	public boolean compare(Vector v1) {
+		if (x == v1.getX() && y== v1.getY()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
 
 	//assesseurs
 	

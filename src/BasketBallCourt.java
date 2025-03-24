@@ -18,9 +18,9 @@ public class BasketBallCourt {
 	}
 
 
-	public void applieGravity(PlayerData joueur, PlayerMoovset joueurMoovset) {
-		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(vecteurGravité.lambda(-1)));
-		if (!joueurMoovset.isInjump() || joueur.vecteurSaut.norme()==0) {
+	public void applieGravity(PlayerMoovset joueurMoovset) {
+		joueurMoovset.getJoueur().setVecteurPosition(joueurMoovset.getJoueur().getVecteurPosition().addition(vecteurGravité.lambda(-1)));
+		if (!joueurMoovset.isInjump() || joueurMoovset.getJoueur().vecteurSaut.norme()==0) {
 			gravity+=accGravity;
 
 		}

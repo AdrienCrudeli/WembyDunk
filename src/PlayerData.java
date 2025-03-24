@@ -9,21 +9,24 @@ public class PlayerData {
 	public double accJump;
 	public Vector vecteurAccélérationJump = new Vector(0,-accJump);
 	public double dividedVit;
+	public double jump;
 	public Vector vecteurPosition;
-	public Vector vecteurSaut;
+	public Vector vecteurSaut = new Vector(0,jump);
 	public double charVit;
+
 	
-	final public Vector vecteurSautInit = new Vector(vecteurSaut.toTab()[0],vecteurSaut.toTab()[1]);
+	final public Vector vecteurSautInit = new Vector(vecteurSaut.getX(),vecteurSaut.getY());
 	final public double charVitInit = charVit;
-	
+	Vector vecteurVitesse = new Vector(0,0);
 
 
 
 
-	public PlayerData(double[] charPos, double charVit, double jump,double dividedVit,double accJump) {
+
+	public PlayerData(double charPosX,double charPosY, double charVit, double jump,double dividedVit,double accJump) {
 		super();
-		vecteurPosition = new Vector(charPos[0],charPos[1]);
-		vecteurSaut = new Vector(0,jump);
+		vecteurPosition = new Vector(charPosX,charPosY);
+		this.accJump = jump;
 		this.charVit = charVit;
 		this.accJump = accJump;
 
@@ -107,6 +110,20 @@ public class PlayerData {
 
 	public void setDividedVit(double dividedVit) {
 		this.dividedVit = dividedVit;
+	}
+
+
+
+	public Vector getVecteurVitesse() {
+		return vecteurVitesse;
+	}
+
+
+
+	public void setVecteurVitesse(double x, double y) {
+		this.vecteurVitesse.setX(x);
+		this.vecteurVitesse.setX(y);
+		
 	}
 
 

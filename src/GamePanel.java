@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	public int charPosY = calcul.getInitCharPosY();
 	public int charVit = calcul.getInitVitChar(); 
 	public int jump = calcul.getInitSaut();
+	Vector nulle = new Vector(0,0);
 
 	public double initGravity = 9.81;
 	public double accGravity = 1;
@@ -44,8 +45,10 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 	//joueur
 	
-	double[] charPos = new double[2];
-	PlayerData joueur1 = new PlayerData(charPos, charVit, jump,2,accJump);
+
+	PlayerData joueur1 = new PlayerData(charPosX,charPosY, charVit, jump,2,accJump);
+	PlayerMoovset joueur1Moovset = new PlayerMoovset(joueur1);
+	BasketBallCourt terrain = new BasketBallCourt(accGravity,gravity);
 
 	public GamePanel() {
 		System.out.println("started");
@@ -107,30 +110,27 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 		boolean injump = false; 
 		if (keyH.qPressed == true) {
+			joueur1Moovset.moovLeft();
 
-			charPosX -= charVit;
 		}
 		
 		if(keyH.sPressed) {
-			charPosY += charVit;
+			joueur1Moovset.moovLeft();
 
 		}
 		if (keyH.dPressed) {
-			charPosX += charVit;
+			joueur1Moovset.moovDown();
 		}
 		if(keyH.spacePressed && injump==false) {
-			injump = true;
-			charVit/=2;
-
+			joueur1Moovset.jumpCondition();
 		}
 		if(keyH.spaceReleased) {
 
 		}
 		//gravité
 		if (charPosY<=screenHeight-106) {
-
-			charPosY+=gravity;
-			if (!injump || jump==0) {
+			terrain.applieGravity(joueur1Moovset);
+			if (!joueur1Moovset.isInjump() || joueur1Moovset.getJoueur().getVecteurSaut().compare(nulle)) {
 			gravity+=accGravity;
 
 			}
@@ -142,8 +142,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 		}
 		if (injump) {
-			charPosY-=(jump);
-			System.out.println(jump);
+			joueur1Moovset.jump();
 			
 			
 			if (jump>0) {
