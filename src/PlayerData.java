@@ -1,95 +1,88 @@
 
 public class PlayerData {
 
-
 	Controller calcul = new Controller();
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread; //start ou stop, s'occupe de la clock
 
-	public double accJump;
-	public Vector vecteurAccélérationJump = new Vector(0,-accJump);
-	public double dividedVit;
-	public double jump;
+	public Vector vecteurAccJump;
 	public Vector vecteurPosition;
-	public Vector vecteurSaut = new Vector(0,jump);
-	public double charVit;
+	public Vector vecteurSaut;
+	public int charVit;
+	public Vector initVecteurSaut;
+	final public int charVitInit = charVit;
+	public Vector vecteurVitesse ;
+	Vector initVecteurVitesse;
+	public Vector vecteurSautInit;
 
-	
-	final public Vector vecteurSautInit = new Vector(vecteurSaut.getX(),vecteurSaut.getY());
-	final public double charVitInit = charVit;
-	Vector vecteurVitesse = new Vector(0,0);
-
-
-
-
-
-	public PlayerData(double charPosX,double charPosY, double charVit, double jump,double dividedVit,double accJump) {
+	public PlayerData(int charPosX,int charPosY, int charVit, int jump,int accJump) {
 		super();
 		vecteurPosition = new Vector(charPosX,charPosY);
-		this.accJump = jump;
+		this.vecteurSaut = new Vector(0, jump);
+		this.vecteurVitesse  = new Vector(0,charVit);
+		this.vecteurAccJump = new Vector(0,accJump);
+		initVecteurSaut = vecteurSaut ;
 		this.charVit = charVit;
-		this.accJump = accJump;
-
+		this.vecteurSautInit = vecteurSaut;
+		this.initVecteurVitesse = vecteurVitesse;
 	}
+
+	public void resetVitesse(){
+		vecteurVitesse=initVecteurVitesse;
+	}
+
+	public void resetJump(){
+		vecteurSaut=initVecteurSaut;
+	}
+
 	//assesseurs
-	
-	
 
-	public double getDividedVit() {
-		return dividedVit;
-	}
-
-
-	public double getCharVitInit() {
+	public int getCharVitInit() {
 		return charVitInit;
 	}
 
+	public Vector getVecteurAccJump() {
+		return vecteurAccJump;
+	}
 
+	public void setVecteurAccJump(Vector vecteurAccJump) {
+		this.vecteurAccJump = vecteurAccJump;
+	}
+
+	public Vector getInitVecteurSaut() {
+		return initVecteurSaut;
+	}
+
+	public void setInitVecteurSaut(Vector initVecteurSaut) {
+		this.initVecteurSaut = initVecteurSaut;
+	}
+
+	public void setVecteurVitesse(Vector vecteurVitesse) {
+		this.vecteurVitesse = vecteurVitesse;
+	}
+
+	public void setVecteurSautInit(Vector vecteurSautInit) {
+		this.vecteurSautInit = vecteurSautInit;
+	}
 
 	public Vector getVecteurSautInit() {
 		return vecteurSautInit;
 	}
 
-
-
-	public double getAccJump() {
-		return accJump;
-	}
-
-
-
-	public void setAccJump(double accJump) {
-		this.accJump = accJump;
-	}
-
-
-
 	public Vector getVecteurAccélérationJump() {
-		return vecteurAccélérationJump;
+		return vecteurAccJump;
 	}
-
-
 
 	public void setVecteurAccélérationJump(Vector vecteurAccélérationJump) {
-		this.vecteurAccélérationJump = vecteurAccélérationJump;
+		this.vecteurAccJump = vecteurAccélérationJump;
 	}
 
-
-
-	public double getCharVit() {
+	public int getCharVit() {
 		return charVit;
 	}
 
-
-
-	public void setCharVit(double charVit) {
+	public void setCharVit(int charVit) {
 		this.charVit = charVit;
-	}
-
-
-
-	public void setDividedVit(int dividedVit) {
-		this.dividedVit = dividedVit;
 	}
 
 	public Vector getVecteurPosition() {
@@ -108,27 +101,12 @@ public class PlayerData {
 		this.vecteurSaut = vecteurSaut;
 	}
 
-	public void setDividedVit(double dividedVit) {
-		this.dividedVit = dividedVit;
-	}
-
-
-
 	public Vector getVecteurVitesse() {
 		return vecteurVitesse;
 	}
 
-
-
-	public void setVecteurVitesse(double x, double y) {
+	public void setVecteurVitesse(int x, int y) {
 		this.vecteurVitesse.setX(x);
-		this.vecteurVitesse.setX(y);
-		
+		this.vecteurVitesse.setY(y);
 	}
-
-
-
-
-
-
 }

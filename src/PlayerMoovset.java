@@ -1,65 +1,74 @@
 
 public class PlayerMoovset {
+	Controller calcul = new Controller();
 	public boolean injump = false;
 	public PlayerData joueur;
-	
-	
-
-
+	public double diviseur=1;
 
 	public PlayerMoovset(PlayerData joueur) {
 		super();
 		this.joueur = joueur;
 	}
-	
+
 	public void moovLeft() {
-		joueur.setVecteurVitesse(0,-joueur.charVit);
+		int pivot = (int) Math.round(-joueur.charVit/diviseur);
+		joueur.setVecteurVitesse(pivot,0);
 		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.vecteurVitesse));
-	}
-	public void moovDown() {
-		joueur.setVecteurVitesse(-joueur.charVit,0);
-		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.vecteurVitesse));
-		
-	}
-	public void moovRight() {
-		joueur.setVecteurVitesse(0,joueur.charVit);
-		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.vecteurVitesse));
-	}
-	public void jumpCondition() {
-		injump=true;
-		joueur.setCharVit(joueur.getCharVit()/joueur.getDividedVit());
 
 	}
+
+	public void moovDown() {
+	int pivot = (int) Math.round(-joueur.charVit/diviseur);
+		joueur.setVecteurVitesse(0,pivot);
+		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.vecteurVitesse));
+	}
+
+	public void moovRight() {
+		int pivot = (int) Math.round(joueur.charVit/diviseur);
+		joueur.setVecteurVitesse(pivot,0);
+		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.vecteurVitesse));
+	}
+
+	public void jumpCondition() {
+		injump=true;
+	}
+
 	public void jump() {
-		joueur.setVecteurPosition(joueur .getVecteurPosition().addition(joueur.getVecteurSaut().lambda(-1)));
+		System.out.println("jump");
+		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.getVecteurSaut().lambda(-1)));
 		if (joueur.getVecteurSaut().norme()>0) {
-			joueur.setVecteurSaut(joueur.getVecteurSaut().addition(joueur.getVecteurSaut().lambda(-1)));
+			joueur.setVecteurSaut(joueur.getVecteurSaut().addition(joueur.getVecteurAccélérationJump().lambda(-1)));
 		}
 	}
 
 	public void resetJump() {
 		joueur.setVecteurSaut(joueur.getVecteurSautInit());
 		joueur.setCharVit(joueur.getCharVitInit());
+	}
 
-	}	
-	public void solveCollisionImprecision(double yGround) {
-		Vector vecteur = new Vector(joueur.getVecteurPosition().toTab()[0],yGround); 
+	public void solveCollisionImprecision(int yGround) {
+		Vector vecteur = new Vector(joueur.getVecteurPosition().getX(),yGround); 
 		joueur.setVecteurPosition(vecteur);
 	}
 
-	
-	
-
-
-
-
-
-
 	//assesseurs 
+	
 	public boolean isInjump() {
 		return injump;
 	}
+	public double getDiviseur() {
+		return diviseur;
+	}
+
+	public void setDiviseur(double diviseur) {
+		this.diviseur = diviseur;
+	}
+
 	public void setInjump(boolean injump) {
+		this.injump = injump;
+	}
+
+	public void setInJump(boolean injump) {
 		this.injump = injump;
 	}
 

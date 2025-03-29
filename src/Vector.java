@@ -1,12 +1,12 @@
 
 public class Vector {
 
-	public double x;
-	public double y;
+	public int x;
+	public int y;
 
 	
 
-	public Vector(double x, double y) {
+	public Vector(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -19,12 +19,12 @@ public class Vector {
 
 	}
 
-	public String toString(Vector v1) {
-		return ""+v1.getX()+","+v1.getY();
+	public String toString() {
+		return ""+x+","+y;
 	}
 
-	public Vector lambda(double l) {
-		Vector v = new Vector(x*y,y*l);
+	public Vector lambda(int l) {
+		Vector v = new Vector(x*l,y*l);
 		return v;
 	}
 	
@@ -60,27 +60,24 @@ public class Vector {
 
 	//assesseurs
 	
-	public double getX() {
+	public int getX() {
 		return x;
 	}
 
 
-	public void setX(double x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 
 
 
-	public double getY() {
+	public int getY() {
 		return y;
 	}
 
 
-	public void setY(double y) {
+	public void setY(int y) {
 		this.y = y;
 	}
-	
 
-	
-	
 }
