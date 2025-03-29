@@ -24,7 +24,7 @@ public class Controller{
 	public int initVitChar = 15;
 	public int initSaut = 75;
 	public int accJump=5;
-	public double dividedVit = 10; //vitesse diviseur dans le saut
+	public double dividedVit = 1.9; //vitesse diviseur dans le saut
 
 	//paramètre Ballon/////////////////////////////////////////////////////////////////////////////////////
 
