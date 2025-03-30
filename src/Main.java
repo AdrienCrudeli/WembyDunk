@@ -2,9 +2,7 @@ import javax.swing.*;
 
 public class Main {
 	public static void main(String[] args) {
-		
 
-;
 
 		//affichage basique en x,y, notez qu'il faudra faire de la composition comme le tuto, on s'en sert juste pour testes
 		JFrame window = new JFrame(); //on crée la fenêtre d'affichage

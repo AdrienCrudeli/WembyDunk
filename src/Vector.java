@@ -1,8 +1,8 @@
 
 public class Vector {
 
-	public int x;
-	public int y;
+	public int x =0;
+	public int y = 0;
 
 	
 
@@ -23,8 +23,10 @@ public class Vector {
 		return ""+x+","+y;
 	}
 
-	public Vector lambda(int l) {
-		Vector v = new Vector(x*l,y*l);
+	public Vector lambda(double l) {
+		int nX = (int) Math.round(x*l);
+		int nY = (int) Math.round(y*l);
+		Vector v = new Vector(nX,nY);
 		return v;
 	}
 	

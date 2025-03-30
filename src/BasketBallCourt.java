@@ -5,19 +5,29 @@ public class BasketBallCourt {
 	public Vector initVecteurGravité;
 	public Vector vecteurGravité;
 	public Vector vecteurAccGravité;
+	public Vector vecteurGravitéBallon;
+	public Vector vecteurAccGravitéBallon;
 
-	public BasketBallCourt(int accGravity, int gravity) {
+
+
+	public BasketBallCourt(Vector vecteurGravité, Vector vecteurAccGravité, Vector vecteurGravitéBallon,
+			Vector vecteurAccGravitéBallon) {
 		super();
-		this.vecteurGravité = new Vector(0,-gravity);
-		this.vecteurAccGravité = new Vector(0,-accGravity);
-		this.initVecteurGravité=vecteurGravité;
+		this.vecteurGravité = vecteurGravité;
+		this.vecteurAccGravité = vecteurAccGravité;
+		this.vecteurGravitéBallon = vecteurGravitéBallon;
+		this.vecteurAccGravitéBallon = vecteurAccGravitéBallon;
 	}
-
 	public void applieGravity(PlayerMoovset joueurMoovset) {
-		joueurMoovset.getJoueur().setVecteurPosition(joueurMoovset.getJoueur().getVecteurPosition().addition(vecteurGravité.lambda(-1)));
+		joueurMoovset.getJoueur().setVecteurPosition(joueurMoovset.getJoueur().getVecteurPosition().addition(vecteurGravité));
 		if (!joueurMoovset.isInjump() || joueurMoovset.getJoueur().vecteurSaut.norme()==0) {
-			vecteurGravité.addition(vecteurAccGravité);
+			setVecteurGravité(vecteurGravité.addition(vecteurAccGravité));
 		}
+	}
+	public void applieBallongravity(Ballon ballon){
+		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(vecteurGravitéBallon.lambda(-1)));
+		setVecteurGravitéBallon(vecteurGravitéBallon.addition(vecteurAccGravitéBallon.lambda(-1)));
+		
 	}
 
 	public void imposeCollision(PlayerData joueur) {
@@ -35,7 +45,20 @@ public class BasketBallCourt {
 	public Vector getInitVecteurGravité() {
 		return initVecteurGravité;
 	}
+	
 
+	public Vector getVecteurGravitéBallon() {
+		return vecteurGravitéBallon;
+	}
+	public void setVecteurGravitéBallon(Vector vecteurGravitéBallon) {
+		this.vecteurGravitéBallon = vecteurGravitéBallon;
+	}
+	public Vector getVecteurAccGravitéBallon() {
+		return vecteurAccGravitéBallon;
+	}
+	public void setVecteurAccGravitéBallon(Vector vecteurAccGravitéBallon) {
+		this.vecteurAccGravitéBallon = vecteurAccGravitéBallon;
+	}
 	public void setInitVecteurGravité(Vector initVecteurGravité) {
 		this.initVecteurGravité = initVecteurGravité;
 	}

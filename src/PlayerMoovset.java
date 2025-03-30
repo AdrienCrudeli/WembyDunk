@@ -18,8 +18,8 @@ public class PlayerMoovset {
 	}
 
 	public void moovDown() {
-	int pivot = (int) Math.round(-joueur.charVit/diviseur);
-		joueur.setVecteurVitesse(0,pivot);
+		int pivot = (int) Math.round(-joueur.charVit/diviseur)-50;
+		joueur.setVecteurVitesse(0,-pivot);
 		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.vecteurVitesse));
 	}
 
@@ -52,7 +52,7 @@ public class PlayerMoovset {
 	}
 
 	//assesseurs 
-	
+
 	public boolean isInjump() {
 		return injump;
 	}
