@@ -1,13 +1,10 @@
 package InterfaceGraphique;
+
 import java.awt.*;
-import java.io.InputStream;
 import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.InputStream;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -21,9 +18,9 @@ public class FrameHistoire extends JFrame {
     private JLabel imageLabel;
     private JTextArea textArea;
     private JButton nextButton;
+    private JButton menuButton;
     private int index = 0;
 
-    // Tableau contenant les chemins des images et les textes associés
     private String[] imagePaths = {"images/image1modehistoire.png", "images/image2modehistoire.png", "images/image3modehistoire.png"};
     private String[] texts = {
         "Depuis tout petit, je passe mes journées à dribbler sur le bitume.\nChaque lancer est un pas de plus vers mon rêve : devenir un grand joueur de basket.\nInspiré par les légendes du jeu, je sais que le chemin sera long… mais je suis prêt à tout donner.",
@@ -44,27 +41,21 @@ public class FrameHistoire extends JFrame {
 
     public FrameHistoire() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
         setContentPane(contentPane);
 
-        // Panel principal
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         contentPane.add(panel, BorderLayout.CENTER);
-        
-        // Démarrer la musique de fond
-        playMusic("/musichistoire.wav");
-   
 
-        // Label pour afficher l'image
+        playMusic("/musichistoire.wav");
+
         imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         panel.add(imageLabel, BorderLayout.CENTER);
 
-        // Zone de texte pour afficher le texte sur plusieurs lignes
         textArea = new JTextArea();
         textArea.setFont(new Font("Arial", Font.BOLD, 16));
         textArea.setLineWrap(true);
@@ -74,40 +65,47 @@ public class FrameHistoire extends JFrame {
         textArea.setMargin(new Insets(10, 10, 10, 10));
         panel.add(textArea, BorderLayout.SOUTH);
 
-        // Bouton pour passer à l'image suivante
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        menuButton = new JButton("←");
+        menuButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		clicBoutonRetourMenu();
+        	}
+        });
+        menuButton.setPreferredSize(new Dimension(120, 30));
+        topPanel.add(menuButton);
+        contentPane.add(topPanel, BorderLayout.NORTH);
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         nextButton = new JButton("Suivant");
+        nextButton.setPreferredSize(new Dimension(120, 30));
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 afficherImageSuivante();
             }
         });
-        contentPane.add(nextButton, BorderLayout.SOUTH);
+        bottomPanel.add(nextButton);
+        contentPane.add(bottomPanel, BorderLayout.SOUTH);
 
-        // Afficher la première image et texte
         afficherImageSuivante();
     }
 
     private void afficherImageSuivante() {
-        // Met à jour l'image et le texte
         if (index >= imagePaths.length) {
-            index = 0; // Revenir à la première image si on dépasse
+            index = 0;
         }
         ImageIcon icon = new ImageIcon(imagePaths[index]);
         imageLabel.setIcon(icon);
         textArea.setText(texts[index]);
         index++;
     }
-    
-    
+
     private void playMusic(String musicPath) {
         try {
-            // Chargement du fichier depuis le classpath
             InputStream audioSrc = getClass().getResourceAsStream(musicPath);
             if (audioSrc == null) {
                 throw new IllegalArgumentException("Fichier audio non trouvé : " + musicPath);
             }
-
-            // Transformer le flux en AudioInputStream
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc));
             clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -117,4 +115,15 @@ public class FrameHistoire extends JFrame {
             e.printStackTrace();
         }
     }
+    
+    public void clicBoutonRetourMenu() {
+    	
+    	if (clip != null && clip.isRunning()) {
+            clip.stop();}
+   	 	this.dispose();
+   	
+       FrameMenuTest obj = new FrameMenuTest();
+       obj.main(null);
+   }
+   
 }
