@@ -37,7 +37,6 @@ public class PlayerMoovset {
 	}
 
 	public void jump() {
-		System.out.println("jump");
 		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.getVecteurSaut().lambda(-1)));
 		if (joueur.getVecteurSaut().norme()>0) {
 			joueur.setVecteurSaut(joueur.getVecteurSaut().addition(joueur.getVecteurAccélérationJump().lambda(-1)));
