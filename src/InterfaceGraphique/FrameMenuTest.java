@@ -18,6 +18,7 @@ public class FrameMenuTest extends JFrame {
         EventQueue.invokeLater(() -> {
             try {
                 FrameMenuTest frame = new FrameMenuTest();
+                
 
                 frame.setVisible(true);
             } catch (Exception e) {
@@ -27,6 +28,7 @@ public class FrameMenuTest extends JFrame {
     }
 
     public FrameMenuTest() {
+    	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         contentPane = new JPanelImageMenu("unnamed.png"); 
@@ -90,7 +92,7 @@ public class FrameMenuTest extends JFrame {
 
         
         // Démarrer la musique de fond
-
+        
         playMusic("/music_arcade.wav");
     }
 
@@ -143,6 +145,7 @@ public class FrameMenuTest extends JFrame {
             clip.start();
         }
     }
+
 
     
     private void playMusic(String musicPath) {

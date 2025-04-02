@@ -43,6 +43,7 @@ public class FrameHistoire extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         contentPane = new JPanel();
+        
         contentPane.setLayout(new BorderLayout());
         setContentPane(contentPane);
 
