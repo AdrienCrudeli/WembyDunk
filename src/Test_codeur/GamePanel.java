@@ -89,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	}
 
 	@Override
-	public void run() { //créer par le thread, gameloop
+	public void run() { //créer par le thread, gameloop, selon gagneux mettre dans simulateur
 		// TODO Auto-generated method stub
 
 		double drawInterval= 1000000000/calcul.getFPS(); //méthode des deltas pour faire attendre
@@ -224,7 +224,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 
 		
-		toPaint[0]=joueur1.getVecteurPosition();
+		toPaint[0]=joueur1.getVecteurPosition(); //enlever pour get dans simulateur
 		toPaint[1]=ballon.getVecteurPosition();
 		toColor[0]=Color.white;
 		toColor[1]=Color.orange;
