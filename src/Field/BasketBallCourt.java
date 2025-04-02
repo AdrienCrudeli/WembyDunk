@@ -32,7 +32,7 @@ public class BasketBallCourt {
 		}
 	}
 	public void applieBallongravity(Ballon ballon){
-		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(vecteurGravitéBallon.lambda(-1)));
+		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(vecteurGravitéBallon.lambda(1)));
 		setVecteurGravitéBallon(vecteurGravitéBallon.addition(vecteurAccGravitéBallon.lambda(-1)));
 		
 	}

@@ -72,17 +72,21 @@ public class BallonMoovSet {
 		double forceOrd = Math.round(dProportion*forceMax-qProportion*forceMax);
 		int forceOrdInt = (int) forceOrd;
 		System.out.println(zProportion);
-		System.out.println(timeZPressed);
-		System.out.println(forceAbs);
-		System.out.println(timeTot);
+		System.out.println(dProportion);
+		System.out.println(qProportion);
+		System.out.println(sProportion);
+		
+		
 		force.setX(forceAbsInt);
 		force.setY(forceOrdInt);
+		
+		System.out.println(force.toString());
 		deCharge();
 	}
 	
 	public void moov(BasketBallCourt terrain) {
-		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force));
-		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(ballon.getVecteurPosition().lambda(-ballon.getU())));
+		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force.lambda(1)));
+		ballon.setVecteurPosition(force.addition(ballon.getVecteurPosition().lambda(-ballon.getU())));
 		terrain.applieBallongravity(ballon);
 	}
 	//constructeur
