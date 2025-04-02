@@ -218,7 +218,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 			ballon.setVecteurPosition(joueur1.getVecteurPosition().addition(offSet));
 		}
 
-		if (!ballonMoovset.isBallonFollowsPlayer() && ballon.getVecteurPosition().compare(joueur1.getVecteurPosition())) {
+		if (!ballonMoovset.isBallonFollowsPlayer() && ballon.getVecteurPosition().compare_intervalle(joueur1.getVecteurPosition())) {
 			ballonMoovset.setBallonFollowsPlayer(true);
 		}
 
