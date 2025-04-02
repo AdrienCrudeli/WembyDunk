@@ -46,7 +46,7 @@ public class Controller{
 	public int initGravity = 10;
 	public int accGravity = 3;
 	public int gravity=initGravity;
-	public Vector vecteurGravité = new Vector(0,initGravity);
+	public Vector vecteurGravité = new Vector(0,gravity);
 	public Vector vecteurAccGravité = new Vector(0,accGravity);
 
 	//Calculs bruts
