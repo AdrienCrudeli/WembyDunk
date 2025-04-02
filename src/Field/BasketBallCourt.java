@@ -23,6 +23,7 @@ public class BasketBallCourt {
 		this.vecteurAccGravité = vecteurAccGravité;
 		this.vecteurGravitéBallon = vecteurGravitéBallon;
 		this.vecteurAccGravitéBallon = vecteurAccGravitéBallon;
+		this.initVecteurGravité=this.vecteurGravité;
 	}
 	public void applieGravity(PlayerMoovset joueurMoovset) {
 		joueurMoovset.getJoueur().setVecteurPosition(joueurMoovset.getJoueur().getVecteurPosition().addition(vecteurGravité));
