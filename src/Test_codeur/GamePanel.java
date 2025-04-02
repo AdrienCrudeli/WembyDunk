@@ -243,7 +243,6 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 		for (int i=0;i<2;i++) {
 			g2.setColor(toColor[i]);
-			System.out.println(i);
 			g2.fillRect(toPaint[i].getX(),toPaint[i].getY(),toFill[i],toFill[i+2]);
 
 		}
