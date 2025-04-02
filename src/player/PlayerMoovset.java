@@ -1,3 +1,6 @@
+package player;
+import Calculator.Controller;
+import Calculator.Vector;
 
 public class PlayerMoovset {
 	Controller calcul = new Controller();

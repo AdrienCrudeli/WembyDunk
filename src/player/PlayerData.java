@@ -1,3 +1,7 @@
+package player;
+import KeyHandler;
+import Calculator.Controller;
+import Calculator.Vector;
 
 public class PlayerData {
 
