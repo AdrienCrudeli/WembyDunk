@@ -27,6 +27,7 @@ public class BallonMoovSet {
 	public boolean ballonFollowsPlayer=true;
 	
 	public Vector force = new Vector(0,0);
+	final Vector forceInit = force;
 	public int forceMax = calcul.getInitForceMax();
 	
 	
@@ -55,6 +56,7 @@ public class BallonMoovSet {
 		timeDPressed =0;
 		timeSPressed =0;
 		timeQPressed =0;
+		force = forceInit;
 		timeTot=0;
 
 	}
