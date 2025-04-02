@@ -237,7 +237,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	@Override
 
 
-	protected void paintComponent(Graphics g) { //classe qui repaint
+	protected void paintComponent(Graphics g) { //classe qui repaint //attention null
 		super.paintComponent(g); //classe parental
 		Graphics2D g2 = (Graphics2D)g;
 
