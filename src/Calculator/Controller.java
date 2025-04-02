@@ -25,9 +25,9 @@ public class Controller{
 	public int initCharPosX = 100;
 	public int initCharPosY = 100;
 	public int initVitChar = 15;
-	public int initSaut = 75;
+	public int initSaut = 60;
 	public int accJump=5;
-	public double dividedVit = 3; //vitesse diviseur dans le saut
+	public double dividedVit = 1; //vitesse diviseur dans le saut
 
 	//paramètre Ballon/////////////////////////////////////////////////////////////////////////////////////
 
@@ -44,8 +44,8 @@ public class Controller{
 
 	//Paramètre terrain/////////////////////////////////////////////////////////////////////////////////////
 
-	public int initGravity = 10;
-	public int accGravity = 3;
+	public int initGravity = 5;
+	public int accGravity = 1;
 	public int gravity=initGravity;
 	public Vector vecteurGravité = new Vector(0,gravity);
 	public Vector vecteurAccGravité = new Vector(0,accGravity);

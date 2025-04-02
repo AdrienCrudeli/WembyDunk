@@ -55,13 +55,6 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	/////////////////////////////////////////////////////////////////////////////////////
 
 
-	//autre nécéssaires
-
-	public boolean pivot = false;
-	public boolean ballonFollowsPlayer = true;
-	public Vector[] toPaint = new Vector[2];
-	public Color[]  toColor = new Color[2];
-	public int[] toFill = new int[4];
 
 	// toutes les objets de classes/////////////////////////////////////////////////////
 
@@ -71,7 +64,14 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	Ballon ballon = new Ballon(imageBallon, vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon);
 	BallonMoovSet ballonMoovset = new BallonMoovSet(ballon);
 	Vector offSet = new Vector(10,10);
+	
+	//autre nécéssaires
 
+	public boolean pivot = false;
+	public Vector[] toPaint = new Vector[2];
+	public Color[]  toColor = new Color[2];
+	public int[] toFill = new int[4];
+	
 	////Code////////////////////////////////////////////////////////////////
 
 	public GamePanel() {
@@ -204,14 +204,14 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 			pivot = true;
 		}
 		if (keyH.aReleased && pivot) {
+			ballonMoovset.setBallonFollowsPlayer(false);
 			ballonMoovset.launch();
 			pivot = false;
-			ballonMoovset.setBallonFollowsPlayer(true);
+			
 		}
 
 		if (ballonMoovset.getForce().norme()!=0 && !ballonMoovset.isBallonFollowsPlayer()) {
 			ballonMoovset.moov(terrain);
-			System.out.println(ballonMoovset.getBallon().getVecteurPosition().toString());
 		}
 
 		if (ballonMoovset.isBallonFollowsPlayer()) {

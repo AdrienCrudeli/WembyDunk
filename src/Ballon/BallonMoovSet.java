@@ -24,7 +24,7 @@ public class BallonMoovSet {
 	public double sProportion;
 	public double qProportion;
 	
-	public boolean ballonFollowsPlayer=false;
+	public boolean ballonFollowsPlayer=true;
 	
 	public Vector force = new Vector(0,0);
 	public int forceMax = calcul.getInitForceMax();
