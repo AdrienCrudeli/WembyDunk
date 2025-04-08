@@ -6,6 +6,8 @@ import Calculator.Vector;
 public class Ballon {
 	
 
+	public boolean collidedX = false;
+	public boolean collidedY = false;
 	
 	//Initialisation
     public ImageIcon imageBallon; //Image importé pointée via nom de fichier
@@ -15,9 +17,37 @@ public class Ballon {
 
 	public double u ; //Coefficient viscosité dynamique
 	public double diamètre; //Diamètre du Ballon
+	public Field.BasketBallCourt terrain;
 	
+	public void changeCollidedX() {
+		if (isCollidedX()) {
+			setCollidedX(false);
+		}
+		else {
+			setCollidedX(true);
+		}
+	}
+	public void changeCollidedY() {
+		if (isCollidedY()) {
+			setCollidedY(false);
+		}
+		else {
+			setCollidedY(true);
+		}
+	}
 	
-	
+	public boolean isCollidedX() {
+		return collidedX;
+	}
+	public void setCollidedX(boolean collidedX) {
+		this.collidedX = collidedX;
+	}
+	public boolean isCollidedY() {
+		return collidedY;
+	}
+	public void setCollidedY(boolean collidedY) {
+		this.collidedY = collidedY;
+	}
 	public ImageIcon getImageBallon() {
 		return imageBallon;
 	}
@@ -48,13 +78,22 @@ public class Ballon {
 	public void setDiamètre(double diamètre) {
 		this.diamètre = diamètre;
 	}
-	public Ballon(ImageIcon imageBallon, Vector vecteurPosition, double vitesse, double u, double diamètre) {
+	
+	
+	public Field.BasketBallCourt getTerrain() {
+		return terrain;
+	}
+	public void setTerrain(Field.BasketBallCourt terrain) {
+		this.terrain = terrain;
+	}
+	public Ballon(ImageIcon imageBallon, Vector vecteurPosition, double vitesse, double u, double diamètre,Field.BasketBallCourt terrain) {
 		super();
 		this.imageBallon = imageBallon;
 		this.vecteurPosition = vecteurPosition;
 		this.vitesse = vitesse;
 		this.u = u;
 		this.diamètre = diamètre;
+		this.terrain =terrain;
 	}
 	
 	

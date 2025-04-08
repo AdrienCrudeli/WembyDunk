@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	PlayerData joueur1 = new PlayerData(charPosX,charPosY, charVit, jump,accJump);
 	PlayerMoovset joueur1Moovset = new PlayerMoovset(joueur1);
 	BasketBallCourt terrain = new BasketBallCourt(accGravity,gravity,gravityBallon,accGravityBallon);
-	Ballon ballon = new Ballon(imageBallon, vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon);
+	Ballon ballon = new Ballon(imageBallon, vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon,terrain);
 	BallonMoovSet ballonMoovset = new BallonMoovSet(ballon);
 	Vector offSet = new Vector(10,10);
 	
@@ -120,16 +120,16 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 
 		//Paramétrage des clés pour partie joueur
-		if (keyH.qPressed == true) { //aller à gauche
+		if (keyH.qPressed == true && !keyH.aPressed) { //aller à gauche
 			joueur1Moovset.moovLeft();
 		}
 
-		if(keyH.sPressed) { //aller en bas
+		if(keyH.sPressed && !keyH.aPressed) { //aller en bas
 			joueur1Moovset.moovDown();
 
 		}
 
-		if (keyH.dPressed) { //aller à droite
+		if (keyH.dPressed && !keyH.aPressed) { //aller à droite
 			joueur1Moovset.moovRight();
 		}
 
@@ -185,8 +185,9 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 
 
-		if (keyH.aPressed) { //partie controller angle et puissance tire
-			if (keyH.zPressed) {
+		if (keyH.aPressed && ballonMoovset.isBallonFollowsPlayer()) { //partie controller angle et puissance tire
+			ballonMoovset.resetForce();
+			if (keyH.zPressed ) {
 				ballonMoovset.chargeZ();
 			}
 			if (keyH.dPressed) {
@@ -203,12 +204,24 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 			pivot = true;
 		}
-		if (keyH.aReleased && pivot) {
+		if (keyH.aReleased && pivot && ballonMoovset.isBallonFollowsPlayer()) {
 			ballonMoovset.setBallonFollowsPlayer(false);
 			ballonMoovset.launch();
 			pivot = false;
 			
 		}
+		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-80) {
+			ballon.getTerrain().resetGravityBallon();
+			ballon.changeCollidedY();
+		}
+		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-81) {
+			ballon.getVecteurPosition().setY(calcul.getScreenHeight()-80);
+		}
+		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth() || ballon.getVecteurPosition().getX()<0 ) {
+		ballon.changeCollidedX();
+	}
+		
+
 
 		if (ballonMoovset.getForce().norme()!=0 && !ballonMoovset.isBallonFollowsPlayer()) {
 			ballonMoovset.moov(terrain);
@@ -221,6 +234,8 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 		if (!ballonMoovset.isBallonFollowsPlayer() && ballon.getVecteurPosition().compare_intervalle(joueur1.getVecteurPosition())) {
 			ballonMoovset.setBallonFollowsPlayer(true);
 		}
+		
+		
 
 
 		

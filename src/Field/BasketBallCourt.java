@@ -1,5 +1,6 @@
 package Field;
 import Ballon.Ballon;
+import Ballon.BallonMoovSet;
 import Calculator.Controller;
 import Calculator.Vector;
 import player.PlayerData;
@@ -13,6 +14,7 @@ public class BasketBallCourt {
 	public Vector vecteurAccGravité;
 	public Vector vecteurGravitéBallon;
 	public Vector vecteurAccGravitéBallon;
+	public Vector initVecteurGravitéBallon;
 
 
 
@@ -24,6 +26,7 @@ public class BasketBallCourt {
 		this.vecteurGravitéBallon = vecteurGravitéBallon;
 		this.vecteurAccGravitéBallon = vecteurAccGravitéBallon;
 		this.initVecteurGravité=this.vecteurGravité;
+		this.initVecteurGravitéBallon = this.vecteurGravitéBallon;
 	}
 	public void applieGravity(PlayerMoovset joueurMoovset) {
 		joueurMoovset.getJoueur().setVecteurPosition(joueurMoovset.getJoueur().getVecteurPosition().addition(vecteurGravité));
@@ -32,13 +35,18 @@ public class BasketBallCourt {
 		}
 	}
 	public void applieBallongravity(Ballon ballon){
+
 		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(vecteurGravitéBallon.lambda(1)));
 		setVecteurGravitéBallon(vecteurGravitéBallon.addition(vecteurAccGravitéBallon.lambda(-1)));
+		System.out.println("Vecteur = "+vecteurGravitéBallon.toString());
 		
 	}
 
 	public void imposeCollision(PlayerData joueur) {
 		joueur.setVecteurPosition(new Vector(joueur.getVecteurPosition().getX(),calcul.getScreenHeight()-106));
+	}
+	public void imposeCollision(Ballon ballon) {
+		ballon.setVecteurPosition(new Vector(ballon.getVecteurPosition().getX(),calcul.getScreenHeight()-106));
 	}
 
 	public void addAccGrav() {
@@ -46,7 +54,11 @@ public class BasketBallCourt {
 	}
 
 	public void resetGravity() {
-		vecteurGravité=initVecteurGravité;
+		this.vecteurGravité=this.initVecteurGravité;
+	}
+	public void resetGravityBallon() {
+		this.vecteurGravitéBallon=this.initVecteurGravitéBallon;
+		
 	}
 
 	public Vector getInitVecteurGravité() {
