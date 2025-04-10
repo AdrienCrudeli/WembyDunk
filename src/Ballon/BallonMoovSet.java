@@ -83,7 +83,7 @@ public class BallonMoovSet {
 
 		double forceOrd = Math.round(zProportion*forceMax-sProportion*forceMax);
 
-		double forceAbs = Math.round(dProportion*forceMax-qProportion*forceMax);
+		double forceAbs = -Math.round(dProportion*forceMax-qProportion*forceMax);
 		int forceOrdInt = (int) forceOrd;
 		int forceAbsInt = (int) forceAbs;
 		System.out.println(zProportion);
@@ -121,6 +121,8 @@ public class BallonMoovSet {
 
 	public void resetForce() {
 		force = forceInit;
+		ballon.setCollidedX(false);
+		ballon.setCollidedY(false);
 	}
 
 

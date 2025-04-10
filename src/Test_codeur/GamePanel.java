@@ -185,7 +185,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 
 
-		if (keyH.aPressed && ballonMoovset.isBallonFollowsPlayer()) { //partie controller angle et puissance tire
+		if (keyH.aPressed && ballonMoovset.isBallonFollowsPlayer()){//partie controller angle et puissance tire
 			ballonMoovset.resetForce();
 			if (keyH.zPressed ) {
 				ballonMoovset.chargeZ();
@@ -210,17 +210,18 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 			pivot = false;
 			
 		}
-		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-80) {
+		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-90) {
 			ballon.getTerrain().resetGravityBallon();
 			ballon.changeCollidedY();
 		}
-		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-81) {
-			ballon.getVecteurPosition().setY(calcul.getScreenHeight()-80);
-		}
-		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth() || ballon.getVecteurPosition().getX()<0 ) {
+
+		
+		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+400|| ballon.getVecteurPosition().getX()<0 ) {
 		ballon.changeCollidedX();
 	}
-		
+		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-80) {
+			ballon.getVecteurPosition().setY(calcul.getScreenHeight()-90);
+		}
 
 
 		if (ballonMoovset.getForce().norme()!=0 && !ballonMoovset.isBallonFollowsPlayer()) {
