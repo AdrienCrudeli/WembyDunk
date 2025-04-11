@@ -10,7 +10,7 @@ public class Ballon {
 	public boolean collidedY = false;
 	
 	//Initialisation
-    public ImageIcon imageBallon; //Image importé pointée via nom de fichier
+    public ImageIcon imageBallon = new ImageIcon("Ballon.png"); //Image importé pointée via nom de fichier
 	public Vector vecteurPosition; //Position Ballon
 
 	public double vitesse ; //Vitesse Ballon instant t
@@ -86,9 +86,8 @@ public class Ballon {
 	public void setTerrain(Field.BasketBallCourt terrain) {
 		this.terrain = terrain;
 	}
-	public Ballon(ImageIcon imageBallon, Vector vecteurPosition, double vitesse, double u, double diamètre,Field.BasketBallCourt terrain) {
+	public Ballon(Vector vecteurPosition, double vitesse, double u, double diamètre,Field.BasketBallCourt terrain) {
 		super();
-		this.imageBallon = imageBallon;
 		this.vecteurPosition = vecteurPosition;
 		this.vitesse = vitesse;
 		this.u = u;
