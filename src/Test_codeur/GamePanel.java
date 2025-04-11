@@ -218,7 +218,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 			ballon.setVecteurPosition(joueur1.getVecteurPosition().addition(offSet));
 		}
 
-		if (!ballonMoovset.isBallonFollowsPlayer() && ballon.getVecteurPosition().compare(joueur1.getVecteurPosition())) {
+		if (!ballonMoovset.isBallonFollowsPlayer() && ballon.getVecteurPosition().compare_intervalle(joueur1.getVecteurPosition())) {
 			ballonMoovset.setBallonFollowsPlayer(true);
 		}
 
@@ -237,7 +237,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	@Override
 
 
-	protected void paintComponent(Graphics g) { //classe qui repaint
+	protected void paintComponent(Graphics g) { //classe qui repaint //attention null
 		super.paintComponent(g); //classe parental
 		Graphics2D g2 = (Graphics2D)g;
 

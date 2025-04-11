@@ -27,6 +27,7 @@ public class BallonMoovSet {
 	public boolean ballonFollowsPlayer=true;
 	
 	public Vector force = new Vector(0,0);
+	final Vector forceInit = force;
 	public int forceMax = calcul.getInitForceMax();
 	
 	
@@ -55,6 +56,7 @@ public class BallonMoovSet {
 		timeDPressed =0;
 		timeSPressed =0;
 		timeQPressed =0;
+		force = forceInit;
 		timeTot=0;
 
 	}
@@ -67,10 +69,11 @@ public class BallonMoovSet {
 		qProportion = (double) timeQPressed/timeTot;
 
 
-		double forceAbs = Math.round(zProportion*forceMax-sProportion*forceMax);
-		int forceAbsInt = (int) forceAbs;
-		double forceOrd = Math.round(dProportion*forceMax-qProportion*forceMax);
+		double forceOrd = Math.round(zProportion*forceMax-sProportion*forceMax);
+		
+		double forceAbs = Math.round(dProportion*forceMax-qProportion*forceMax);
 		int forceOrdInt = (int) forceOrd;
+		int forceAbsInt = (int) forceAbs;
 		System.out.println(zProportion);
 		System.out.println(dProportion);
 		System.out.println(qProportion);
@@ -80,14 +83,15 @@ public class BallonMoovSet {
 		force.setX(forceAbsInt);
 		force.setY(forceOrdInt);
 		
-		System.out.println(force.toString());
+	
 		deCharge();
 	}
 	
 	public void moov(BasketBallCourt terrain) {
-		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force.lambda(1)));
-		ballon.setVecteurPosition(force.addition(ballon.getVecteurPosition().lambda(-ballon.getU())));
+		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force.lambda(-1)));
+		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force.lambda(-ballon.getU())));
 		terrain.applieBallongravity(ballon);
+		System.out.println(force.toString());
 	}
 	//constructeur
 	

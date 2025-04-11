@@ -61,6 +61,14 @@ public class Vector {
 		
 	}
 
+	public boolean compare_intervalle(Vector v1) {
+		if (x < v1.getX() + 32 && x > v1.getX() - 32 && y < v1.getY() + 32 && y > v1.getY() - 32) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	//assesseurs
 	
 	public int getX() {
