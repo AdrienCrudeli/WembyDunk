@@ -8,6 +8,11 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+
+/// SORTE DE DOUBLE "INUTILE" DE MENU1EREVERSION MAIS ON LE GARDE AU CAS OU POUR L'INSTANT CAR IL FONCTIONNNE 
+
+
+
 public class FrameMenuTest extends JFrame {
 
     private static final long serialVersionUID = 1L;

@@ -123,7 +123,7 @@ public class FrameHistoire extends JFrame {
             clip.stop();}
    	 	this.dispose();
    	
-       FrameMenuTest obj = new FrameMenuTest();
+       menu1ereVersion obj = new menu1ereVersion();
        obj.main(null);
    }
    
