@@ -21,7 +21,7 @@ import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 
-public class FrameMenuTest extends JFrame {
+public class menu1ereVersion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -31,7 +31,7 @@ public class FrameMenuTest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrameMenuTest frame = new FrameMenuTest();
+					menu1ereVersion frame = new menu1ereVersion();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,26 +40,22 @@ public class FrameMenuTest extends JFrame {
 		});
 	}
 
-	public FrameMenuTest() {
+	public menu1ereVersion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanelImageMenu("test.jpg"); 
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        contentPane = new JPanelImageMenu("unnamed.png"); 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		
 
 		JPanel panel_1 = new JPanel(); 
 		panel_1.setOpaque(false);
 		contentPane.add(panel_1, BorderLayout.CENTER);
-		/*panel_1.setLayout(new FormLayout(new ColumnSpec[] {
-                                                                        		ColumnSpec.decode("331px"),},
-                                                                        	new RowSpec[] {
-                                                                        		RowSpec.decode("106px"),
-                                                                        		RowSpec.decode("41px"),
-                                                                        		FormSpecs.RELATED_GAP_ROWSPEC,
-                                                                        		FormSpecs.DEFAULT_ROWSPEC,
-                                                                        		FormSpecs.RELATED_GAP_ROWSPEC,
-                                                                        		FormSpecs.DEFAULT_ROWSPEC,}));*/
+
+
+
 
 		JPanel panel = new JPanel();
 		panel.setOpaque(false);
@@ -143,6 +139,7 @@ public class FrameMenuTest extends JFrame {
 		JPanel panel_5 = new JPanel();
 		contentPane.add(panel_5, BorderLayout.SOUTH);
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
+		
 
 		// Démarrer la musique de fond
 		playMusic("C:/Users/Emili/Downloads/music_arcade.wav");

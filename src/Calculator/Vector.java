@@ -69,6 +69,14 @@ public class Vector {
 			return false;
 		}
 	}
+	
+	public void symetryX() {
+		setX(-x);
+	}
+	public void symetryY() {
+		setY(-y);
+	}
+	
 	//assesseurs
 	
 	public int getX() {
@@ -90,5 +98,7 @@ public class Vector {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+
 
 }

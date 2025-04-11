@@ -33,7 +33,7 @@ public class Controller{
 
 	public Vector initVecteurPositionBallon = new Vector(0,0);
 	public int initVit = 0;
-	public double initMhu = 0.5;
+	public double initMhu = 0.075;
 	public double initDiameter = 0.2419;
 	public ImageIcon imageBallon = new ImageIcon("Ballon.png");
 	public int initForceMax = 100;
