@@ -180,6 +180,13 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 			terrain.imposeCollision(joueur1);
 		}
+		
+		if (joueur1.getVecteurPosition().getX()>calcul.getScreenWidth()+420) {
+			joueur1.getVecteurPosition().setX(calcul.getScreenWidth()+400);;
+		}
+		if (joueur1.getVecteurPosition().getX()<-20) {
+			joueur1.getVecteurPosition().setX(0);;
+		}
 
 		//Partie Ballon
 
@@ -220,7 +227,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 		ballon.changeCollidedX();
 	}
 		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-80) {
-			ballon.getVecteurPosition().setY(calcul.getScreenHeight()-90);
+			ballon.getVecteurPosition().setY(calcul.getScreenHeight()-70);
 		}
 
 
@@ -234,6 +241,13 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 		if (!ballonMoovset.isBallonFollowsPlayer() && ballon.getVecteurPosition().compare_intervalle(joueur1.getVecteurPosition())) {
 			ballonMoovset.setBallonFollowsPlayer(true);
+		}
+		
+		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+420) {
+			ballon.getVecteurPosition().setX(calcul.getScreenWidth()+400);;
+		}
+		if (ballon.getVecteurPosition().getX()<-20) {
+			ballon.getVecteurPosition().setX(0);;
 		}
 		
 		
