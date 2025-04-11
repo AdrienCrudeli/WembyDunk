@@ -93,7 +93,7 @@ public class FrameArcade extends JFrame {
 		 
 		 this.dispose();
 	        
-	        FrameMenuTest obj = new FrameMenuTest();
+	        menu1ereVersion obj = new menu1ereVersion();
 	        obj.main(null);
 	    }
 

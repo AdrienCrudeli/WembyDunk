@@ -79,7 +79,7 @@ public class FrameParametres extends JFrame {
 
     public void clicBoutonRetourMenu() {
         this.dispose();
-        FrameMenuTest obj = new FrameMenuTest();
+        menu1ereVersion obj = new menu1ereVersion();
         obj.main(null);
     }
 }

@@ -1,7 +1,12 @@
 package InterfaceGraphique;
-import java.awt.BorderLayout; 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.InputStream;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -17,6 +22,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -41,144 +47,141 @@ public class menu1ereVersion extends JFrame {
 	}
 
 	public menu1ereVersion() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         contentPane = new JPanelImageMenu("unnamed.png"); 
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		
-
-		JPanel panel_1 = new JPanel(); 
-		panel_1.setOpaque(false);
-		contentPane.add(panel_1, BorderLayout.CENTER);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(0, 0));
 
 
+        // Panel central avec un sous-panel pour centrer les boutons
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+        JPanel innerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        innerPanel.setOpaque(false);
+
+        JButton histoireButton = new JButton("HISTOIRE");
+        histoireButton.setIcon(new ImageIcon("images/imagebouttonmenu.jpg"));
+        histoireButton.setActionCommand("histoire");
+        histoireButton.setBorderPainted(false);
+        histoireButton.setPreferredSize(new Dimension(240, 100));
+        histoireButton.setBackground(new Color(153, 0, 255));
+        JButton arcadeButton = new JButton("ARCADE");
+        arcadeButton.setIcon(new ImageIcon("images/imagebouttonarcade.jpeg"));
+        arcadeButton.setBorderPainted(false);
+        arcadeButton.setPreferredSize(new Dimension(240, 100));
+        arcadeButton.setBounds(new Rectangle(0, 0, 124, 127));
+        arcadeButton.setBackground(new Color(204, 0, 0));
+
+        histoireButton.setFont(new Font("Eras Bold ITC", Font.PLAIN, 14));
+        arcadeButton.setFont(new Font("Eras Bold ITC", Font.PLAIN, 14));
+
+        innerPanel.add(histoireButton);
+        innerPanel.add(arcadeButton);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        centerPanel.add(innerPanel, gbc);
+
+        contentPane.add(centerPanel, BorderLayout.CENTER);
+
+        // Panel bas pour les boutons "Paramètres" et "Son"
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.setOpaque(false);
+        bottomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        JButton parametreButton = new JButton("PARAMETRES");
+        JButton sonButton = new JButton("SON");
+
+        parametreButton.setFont(new Font("Eras Bold ITC", Font.PLAIN, 14));
+        sonButton.setFont(new Font("Eras Bold ITC", Font.PLAIN, 14));
+
+        bottomPanel.add(parametreButton, BorderLayout.WEST);
+        bottomPanel.add(sonButton, BorderLayout.EAST);
+        contentPane.add(bottomPanel, BorderLayout.SOUTH);
+
+        // Ajout des actions
+        histoireButton.addActionListener(e -> clicBoutonHistoire());
+        arcadeButton.addActionListener(e -> clicBoutonArcade());
+        parametreButton.addActionListener(e -> clicBoutonParametres());
+        sonButton.addActionListener(e -> clicBoutonSon());
+
+        
+        // Démarrer la musique de fond
+        
+        playMusic("/music_arcade.wav");
+    }
+
+    public void clicBoutonHistoire() {
+    	// Fermer la fenêtre actuelle (menu)
+    	
+        this.dispose();  // Ferme le menu
+        
+        FrameHistoire obj = new FrameHistoire();
+        obj.main(null);
+        
+        // Arrêter la musique en cours
+        if (clip != null && clip.isRunning()) {
+            clip.stop();  // Arrêter la musique
+        }
+    }
+
+    public void clicBoutonArcade() {
+    	// Fermer la fenêtre actuelle (menu)
+    	
+        this.dispose();  // Ferme le menu
+        
+        FrameArcade obj = new FrameArcade();
+        obj.main(null);
+        
+        // Arrêter la musique en cours
+        if (clip != null && clip.isRunning()) {
+            clip.stop();  // Arrêter la musique
+        }
+    }
+
+    public void clicBoutonParametres() {
+    	// Fermer la fenêtre actuelle (menu)
+    	
+        this.dispose();  // Ferme le menu
+        
+        FrameParametres obj = new FrameParametres();
+        obj.main(null);
+        
+        // Arrêter la musique en cours
+        if (clip != null && clip.isRunning()) {
+            clip.stop();  // Arrêter la musique
+            }
+    }
+
+    public void clicBoutonSon() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+        } else {
+            clip.start();
+        }
+    }
 
 
-		JPanel panel = new JPanel();
-		panel.setOpaque(false);
-		panel_1.add(panel, "1, 2, fill, center");
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    
+    private void playMusic(String musicPath) {
+        try {
+            // Chargement du fichier depuis le classpath
+            InputStream audioSrc = getClass().getResourceAsStream(musicPath);
+            if (audioSrc == null) {
+                throw new IllegalArgumentException("Fichier audio non trouvé : " + musicPath);
+            }
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setOpaque(false);
-		panel.add(panel_3);
-		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		JButton btnNewButton = new JButton("HISTOIRE");
-		btnNewButton.setFont(new Font("Eras Bold ITC", Font.PLAIN, 10));
-		panel_3.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clicBoutonHistoire();
-			}
-		});
-
-
-		JButton btnNewButton_1 = new JButton("ARCADE");
-		btnNewButton_1.setFont(new Font("Eras Bold ITC", Font.PLAIN, 10));
-		panel_3.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clicBoutonArcade();
-			}
-		});
-
-		JButton btnNewButton_2 = new JButton("PARAMETRES");
-		btnNewButton_2.setFont(new Font("Eras Bold ITC", Font.PLAIN, 10));
-		panel_3.add(btnNewButton_2);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clicBoutonParametres();
-			}
-		});
-
-		JPanel panel_4 = new JPanel();
-		panel_4.setOpaque(false);
-		contentPane.add(panel_4, BorderLayout.EAST);
-		GridBagLayout gbl_panel_4 = new GridBagLayout();
-		gbl_panel_4.columnWidths = new int[]{95, 0};
-		gbl_panel_4.rowHeights = new int[]{253, 0};
-		gbl_panel_4.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_4.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_4.setLayout(gbl_panel_4);
-
-		JPanel panel_6 = new JPanel();
-		panel_6.setOpaque(false);
-		GridBagConstraints gbc_panel_6 = new GridBagConstraints();
-		gbc_panel_6.anchor = GridBagConstraints.SOUTHEAST;
-		gbc_panel_6.gridx = 0;
-		gbc_panel_6.gridy = 0;
-		panel_4.add(panel_6, gbc_panel_6);
-		GridBagLayout gbl_panel_6 = new GridBagLayout();
-		gbl_panel_6.columnWidths = new int[]{52, 0};
-		gbl_panel_6.rowHeights = new int[]{21, 0};
-		gbl_panel_6.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_6.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_6.setLayout(gbl_panel_6);
-
-
-
-		JButton btnNewButton_3 = new JButton("SON");
-		btnNewButton_3.setBorderPainted(false);
-		btnNewButton_3.setFocusPainted(false);
-		btnNewButton_3.setContentAreaFilled(true); 
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clicBoutonSon();
-			}
-		});
-		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-		gbc_btnNewButton_3.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnNewButton_3.gridx = 0;
-		gbc_btnNewButton_3.gridy = 0;
-		panel_6.add(btnNewButton_3, gbc_btnNewButton_3);
-
-		JPanel panel_5 = new JPanel();
-		contentPane.add(panel_5, BorderLayout.SOUTH);
-		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
-		
-
-		// Démarrer la musique de fond
-		playMusic("C:/Users/Emili/Downloads/music_arcade.wav");
-	}
-
-	public void clicBoutonHistoire() {
-		FrameHistoire obj = new FrameHistoire();
-		obj.main(null);
-	}
-
-	public void clicBoutonArcade() {
-		FrameArcade obj = new FrameArcade();
-		obj.main(null);
-	}
-
-	public void clicBoutonParametres() {
-		FrameParametres obj = new FrameParametres();
-		obj.main(null);
-	}
-
-	public void clicBoutonSon() {
-		if (clip != null && clip.isRunning()) {
-			clip.stop();
-		}
-		else {
-			clip.start();
-		}
-	}
-
-	private void playMusic(String filePath) {
-		try {
-			File file = new File("C:/Users/Emili/Downloads/music_arcade.wav"); // Chemin absolu
-			AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-			clip = AudioSystem.getClip();
-			clip.open(audioStream);
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
-			clip.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            // Transformer le flux en AudioInputStream
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new BufferedInputStream(audioSrc));
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
