@@ -61,26 +61,21 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	PlayerData joueur1 = new PlayerData(charPosX,charPosY, charVit, jump,accJump);
 	PlayerMoovset joueur1Moovset = new PlayerMoovset(joueur1);
 	BasketBallCourt terrain = new BasketBallCourt(accGravity,gravity,gravityBallon,accGravityBallon);
-	Ballon ballon = new Ballon(imageBallon, vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon,terrain);
+	Ballon ballon = new Ballon(vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon,terrain);
 	BallonMoovSet ballonMoovset = new BallonMoovSet(ballon);
 	Vector offSet = new Vector(10,10);
 	
 	//autre nécéssaires
 
 	public boolean pivot = false;
-	public Vector[] toPaint = new Vector[2];
-	public Color[]  toColor = new Color[2];
-	public int[] toFill = new int[4];
+
 	
 	////Code////////////////////////////////////////////////////////////////
 
 	public GamePanel() {
 		System.out.println("started");
-		this.setPreferredSize(new Dimension(calcul.getScreenWidth(),calcul.getScreenHeight()));
-		this.setBackground(Color.black);
 		this.setDoubleBuffered(true); //paramètre pour optimisation
 		this.addKeyListener(keyH); //reconnait keyH comme donneur d'entrée
-		this.setFocusable(true);
 	}
 
 	public void startGameThread() { //Game Thread
@@ -250,36 +245,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 			ballon.getVecteurPosition().setX(0);;
 		}
 		
-		
-
-
-		
-		toPaint[0]=joueur1.getVecteurPosition(); //enlever pour get dans simulateur
-		toPaint[1]=ballon.getVecteurPosition();
-		toColor[0]=Color.white;
-		toColor[1]=Color.orange;
-		toFill[0]=calcul.getTileSize();
-		toFill[1]=(int) (calcul.getTileSize()/2);
-		toFill[2]=calcul.getTileSize();
-		toFill[3]=(int) (calcul.getTileSize()/2);
 		}
-
-	@Override
-
-
-	protected void paintComponent(Graphics g) { //classe qui repaint //attention null
-		super.paintComponent(g); //classe parental
-		Graphics2D g2 = (Graphics2D)g;
-
-		for (int i=0;i<2;i++) {
-			g2.setColor(toColor[i]);
-			g2.fillRect(toPaint[i].getX(),toPaint[i].getY(),toFill[i],toFill[i+2]);
-
-		}
-		g2.dispose(); //aide pour le calcul en abandonnant les tache
-	}
-
-
 
 
 
@@ -318,6 +284,224 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	public void windowDeactivated(WindowEvent e) {
 		// TODO Auto-generated method stub
 	}
+	//accesseurs
+
+	public Controller getCalcul() {
+		return calcul;
+	}
+
+	public void setCalcul(Controller calcul) {
+		this.calcul = calcul;
+	}
+
+	public KeyHandler getKeyH() {
+		return keyH;
+	}
+
+	public void setKeyH(KeyHandler keyH) {
+		this.keyH = keyH;
+	}
+
+	public Thread getGameThread() {
+		return gameThread;
+	}
+
+	public void setGameThread(Thread gameThread) {
+		this.gameThread = gameThread;
+	}
+
+	public int getCharPosX() {
+		return charPosX;
+	}
+
+	public void setCharPosX(int charPosX) {
+		this.charPosX = charPosX;
+	}
+
+	public int getCharPosY() {
+		return charPosY;
+	}
+
+	public void setCharPosY(int charPosY) {
+		this.charPosY = charPosY;
+	}
+
+	public int getCharVit() {
+		return charVit;
+	}
+
+	public void setCharVit(int charVit) {
+		this.charVit = charVit;
+	}
+
+	public int getJump() {
+		return jump;
+	}
+
+	public void setJump(int jump) {
+		this.jump = jump;
+	}
+
+	public Vector getNulle() {
+		return nulle;
+	}
+
+	public void setNulle(Vector nulle) {
+		this.nulle = nulle;
+	}
+
+	public Vector getGravity() {
+		return gravity;
+	}
+
+	public void setGravity(Vector gravity) {
+		this.gravity = gravity;
+	}
+
+	public Vector getAccGravity() {
+		return accGravity;
+	}
+
+	public void setAccGravity(Vector accGravity) {
+		this.accGravity = accGravity;
+	}
+
+	public int getAccJump() {
+		return accJump;
+	}
+
+	public void setAccJump(int accJump) {
+		this.accJump = accJump;
+	}
+
+	public int getInitGravity() {
+		return initGravity;
+	}
+
+	public void setInitGravity(int initGravity) {
+		this.initGravity = initGravity;
+	}
+
+	public boolean isAsBeenPressed() {
+		return asBeenPressed;
+	}
+
+	public void setAsBeenPressed(boolean asBeenPressed) {
+		this.asBeenPressed = asBeenPressed;
+	}
+
+	public ImageIcon getImageBallon() {
+		return imageBallon;
+	}
+
+	public void setImageBallon(ImageIcon imageBallon) {
+		this.imageBallon = imageBallon;
+	}
+
+	public Vector getVecteurPositionBallon() {
+		return vecteurPositionBallon;
+	}
+
+	public void setVecteurPositionBallon(Vector vecteurPositionBallon) {
+		this.vecteurPositionBallon = vecteurPositionBallon;
+	}
+
+	public double getVitesseBallon() {
+		return vitesseBallon;
+	}
+
+	public void setVitesseBallon(double vitesseBallon) {
+		this.vitesseBallon = vitesseBallon;
+	}
+
+	public double getuBallon() {
+		return uBallon;
+	}
+
+	public void setuBallon(double uBallon) {
+		this.uBallon = uBallon;
+	}
+
+	public double getDiamètreBallon() {
+		return diamètreBallon;
+	}
+
+	public void setDiamètreBallon(double diamètreBallon) {
+		this.diamètreBallon = diamètreBallon;
+	}
+
+	public Vector getGravityBallon() {
+		return gravityBallon;
+	}
+
+	public void setGravityBallon(Vector gravityBallon) {
+		this.gravityBallon = gravityBallon;
+	}
+
+	public Vector getAccGravityBallon() {
+		return accGravityBallon;
+	}
+
+	public void setAccGravityBallon(Vector accGravityBallon) {
+		this.accGravityBallon = accGravityBallon;
+	}
+
+	public PlayerData getJoueur1() {
+		return joueur1;
+	}
+
+	public void setJoueur1(PlayerData joueur1) {
+		this.joueur1 = joueur1;
+	}
+
+	public PlayerMoovset getJoueur1Moovset() {
+		return joueur1Moovset;
+	}
+
+	public void setJoueur1Moovset(PlayerMoovset joueur1Moovset) {
+		this.joueur1Moovset = joueur1Moovset;
+	}
+
+	public BasketBallCourt getTerrain() {
+		return terrain;
+	}
+
+	public void setTerrain(BasketBallCourt terrain) {
+		this.terrain = terrain;
+	}
+
+	public Ballon getBallon() {
+		return ballon;
+	}
+
+	public void setBallon(Ballon ballon) {
+		this.ballon = ballon;
+	}
+
+	public BallonMoovSet getBallonMoovset() {
+		return ballonMoovset;
+	}
+
+	public void setBallonMoovset(BallonMoovSet ballonMoovset) {
+		this.ballonMoovset = ballonMoovset;
+	}
+
+	public Vector getOffSet() {
+		return offSet;
+	}
+
+	public void setOffSet(Vector offSet) {
+		this.offSet = offSet;
+	}
+
+	public boolean isPivot() {
+		return pivot;
+	}
+
+	public void setPivot(boolean pivot) {
+		this.pivot = pivot;
+	}
+	
 }
 
 

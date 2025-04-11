@@ -23,6 +23,7 @@ public class FrameArcade extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private GamePanel gamearcade; // Déclaré ici
+	private JPanelDessin paint;
 
 	/**
 	 * Launch the application.
@@ -65,11 +66,12 @@ public class FrameArcade extends JFrame {
 		
 		setLayout(new BorderLayout()); // Utilisation d'un BorderLayout pour bien gérer l'affichage
 
-        gamearcade = new GamePanel();
-        gamearcade.setOpaque(true);
+        paint = new JPanelDessin();
+        paint.setOpacity(1.0f);
         // Ajout du GamePanel à la Frame
-        getContentPane().add(gamearcade, BorderLayout.CENTER);
-        add(gamearcade, BorderLayout.CENTER); // Ajout du panel dans la fenêtre
+        
+        getContentPane().add(paint, BorderLayout.CENTER);
+        add(paint, BorderLayout.CENTER); // Ajout du panel dans la fenêtre
         
         gamearcade.startGameThread(); // Lancement du thread de jeu
 		
