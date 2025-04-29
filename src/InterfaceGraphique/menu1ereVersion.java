@@ -70,6 +70,7 @@ public class menu1ereVersion extends JFrame {
         JButton arcadeButton = new JButton("ARCADE");
         arcadeButton.setIcon(new ImageIcon("images/imagebouttonarcade.jpeg"));
         arcadeButton.setBorderPainted(false);
+        arcadeButton.setActionCommand("arcade");
         arcadeButton.setPreferredSize(new Dimension(240, 100));
         arcadeButton.setBounds(new Rectangle(0, 0, 124, 127));
         arcadeButton.setBackground(new Color(204, 0, 0));

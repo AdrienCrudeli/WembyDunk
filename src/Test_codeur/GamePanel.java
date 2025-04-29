@@ -7,6 +7,7 @@ import Ballon.BallonMoovSet;
 import Calculator.Controller;
 import Calculator.Vector;
 import Field.BasketBallCourt;
+import InterfaceGraphique.JPanelDessin;
 import player.PlayerData;
 import player.PlayerMoovset;
 
@@ -64,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	Ballon ballon = new Ballon(vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon,terrain);
 	BallonMoovSet ballonMoovset = new BallonMoovSet(ballon);
 	Vector offSet = new Vector(10,10);
+	JPanelDessin dessin = new JPanelDessin();
 	
 	//autre nécéssaires
 
@@ -86,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	@Override
 	public void run() { //créer par le thread, gameloop, selon gagneux mettre dans simulateur
 		// TODO Auto-generated method stub
+		
 
 		double drawInterval= 1000000000/calcul.getFPS(); //méthode des deltas pour faire attendre
 		double delta = 0; // on est en train de créer le séquencage
@@ -99,10 +102,10 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 			if (delta>=1) {
 				//update
-				update();
+				dessin.update();
 
 				//dessine
-				repaint();
+				dessin.repaint();
 
 				delta --;
 			}

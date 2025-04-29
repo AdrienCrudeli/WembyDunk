@@ -22,8 +22,8 @@ import Test_codeur.GamePanel;
 public class FrameArcade extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private GamePanel gamearcade; // Déclaré ici
-	private JPanelDessin paint;
+	private GamePanel gamearcade = new GamePanel(); // Déclaré ici
+	private JPanelDessin paint = new JPanelDessin();
 
 	/**
 	 * Launch the application.
@@ -67,7 +67,7 @@ public class FrameArcade extends JFrame {
 		setLayout(new BorderLayout()); // Utilisation d'un BorderLayout pour bien gérer l'affichage
 
         paint = new JPanelDessin();
-        paint.setOpacity(1.0f);
+        
         // Ajout du GamePanel à la Frame
         
         getContentPane().add(paint, BorderLayout.CENTER);
