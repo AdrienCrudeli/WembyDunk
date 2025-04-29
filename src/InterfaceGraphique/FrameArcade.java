@@ -48,37 +48,19 @@ public class FrameArcade extends JFrame {
 	public FrameArcade() {
 		setSize(new Dimension(500, 300));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
-		/*contentPane = new JPanel();
-		contentPane.setBackground(new Color(128, 0, 128));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JPanel panel = new JPanel();
-		panel.setOpaque(false);
-		contentPane.add(panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);*/
-		
-		getContentPane().setLayout(new BorderLayout()); // Utilisation d'un BorderLayout pour bien gérer l'affichage
+	    paint = new JPanelDessin();
+	    getContentPane().add(paint, BorderLayout.CENTER);
 
-        paint = new JPanelDessin();
-        
-        // Ajout du GamePanel à la Frame
-        
-        getContentPane().add(paint, BorderLayout.CENTER);
-        getContentPane().add(paint, BorderLayout.CENTER); // Ajout du panel dans la fenêtre
-        
-        gamearcade = new GamePanel(paint);
-        paint.setGp(gamearcade);
-        gamearcade.start(); // Lancement du thread de jeu
+	    gamearcade = new GamePanel(paint);
+	    paint.setGp(gamearcade);
+	    gamearcade.start();
+
+	    // *** Register the key listener here ***
+	    paint.addKeyListener(gamearcade.getKeyH());
+	    // Ensure panel can get focus
+	    paint.setFocusable(true);
+	    // Request focus once the UI is up
 		
 		JButton btnNewButton = new JButton(" ← ");
 		btnNewButton.addActionListener(new ActionListener() {
