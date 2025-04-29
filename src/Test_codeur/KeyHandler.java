@@ -16,6 +16,7 @@ public void keyTyped(KeyEvent e) {
 
 		if (keyCode == KeyEvent.VK_Z) {
 			zPressed = true;
+			System.out.println("true");
 
 		}
 

@@ -19,7 +19,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class GamePanel extends Thread implements Runnable {
+public class GamePanel extends JPanel implements Runnable {
 
 	Controller calcul = new Controller();
 	KeyHandler keyH = new KeyHandler();
@@ -75,10 +75,15 @@ public class GamePanel extends Thread implements Runnable {
 
 	public GamePanel(JPanelDessin dessin ) {
 		this.dessin=dessin;
+		this.setFocusable(true); // Make the panel focusable
+		this.addKeyListener(keyH); // Add the KeyHandler as a key listener
 
 	}
 
-
+public void start() {
+	Thread t1 = new Thread(this);
+    t1.start();
+}
 	@Override
 	public void run() { //créer par le thread, gameloop, selon gagneux mettre dans simulateur
 		// TODO Auto-generated method stub
@@ -102,12 +107,7 @@ public class GamePanel extends Thread implements Runnable {
 
 				delta --;
 			}
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 	}
 
