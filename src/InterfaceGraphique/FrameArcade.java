@@ -18,12 +18,13 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import Test_codeur.GamePanel;
+import java.awt.Dimension;
 
 public class FrameArcade extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private GamePanel gamearcade = new GamePanel(); // Déclaré ici
-	private JPanelDessin paint = new JPanelDessin();
+	private GamePanel gamearcade; // Déclaré ici
+	private JPanelDessin paint;
 
 	/**
 	 * Launch the application.
@@ -45,8 +46,10 @@ public class FrameArcade extends JFrame {
 	 * Create the frame.
 	 */
 	public FrameArcade() {
+		setSize(new Dimension(500, 300));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
 		/*contentPane = new JPanel();
 		contentPane.setBackground(new Color(128, 0, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,16 +67,18 @@ public class FrameArcade extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);*/
 		
-		setLayout(new BorderLayout()); // Utilisation d'un BorderLayout pour bien gérer l'affichage
+		getContentPane().setLayout(new BorderLayout()); // Utilisation d'un BorderLayout pour bien gérer l'affichage
 
         paint = new JPanelDessin();
         
         // Ajout du GamePanel à la Frame
         
         getContentPane().add(paint, BorderLayout.CENTER);
-        add(paint, BorderLayout.CENTER); // Ajout du panel dans la fenêtre
+        getContentPane().add(paint, BorderLayout.CENTER); // Ajout du panel dans la fenêtre
         
-        gamearcade.startGameThread(); // Lancement du thread de jeu
+        gamearcade = new GamePanel(paint);
+        paint.setGp(gamearcade);
+        gamearcade.start(); // Lancement du thread de jeu
 		
 		JButton btnNewButton = new JButton(" ← ");
 		btnNewButton.addActionListener(new ActionListener() {

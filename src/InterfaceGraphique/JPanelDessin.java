@@ -24,40 +24,43 @@ public class JPanelDessin extends JPanel {
 	
 	public Vector[] toPaint = new Vector[2];
 	public Color[]  toColor = new Color[2];
-	private GamePanel gp = new GamePanel();
+	private GamePanel gp ;
 	public int[] toFill = new int[4];
 	
 	
 	
+	public void setGp(GamePanel gp) {
+		this.gp = gp;
+	}
 	public JPanelDessin () {
-		this.setPreferredSize(new Dimension(gp.getCalcul().getScreenWidth(),gp.getCalcul().getScreenHeight()));
 		this.setBackground(Color.black);
 		this.setFocusable(true);
 	}
 	protected void paintComponent(Graphics g) { //classe qui repaint //attention null
-		
 		super.paintComponents(g); //classe parental
-		Graphics2D g2 = (Graphics2D)g;
-		toPaint[0]=gp.getJoueur1().getVecteurPosition(); 
-		toPaint[1]=gp.getBallon().getVecteurPosition();
-		toColor[0]=Color.white;
-		toColor[1]=Color.orange;
-		toFill[0]=gp.getCalcul().getTileSize();
-		toFill[1]=(int) (gp.getCalcul().getTileSize()/2);
-		toFill[2]=gp.getCalcul().getTileSize();
-		toFill[3]=(int) (gp.getCalcul().getTileSize()/2);
+		System.out.println("dessin");
+		this.setBackground(Color.black);
 
-		for (int i=0;i<2;i++) {
-			g2.setColor(toColor[i]);
-			g2.fillRect(toPaint[i].getX(),toPaint[i].getY(),toFill[i],toFill[i+2]);
-
+		if(gp!=null) {
+			double dx = (double)this.getWidth()/gp.getCalcul().getScreenWidth();
+			toPaint[0]=gp.getJoueur1().getVecteurPosition(); 
+			toPaint[1]=gp.getBallon().getVecteurPosition();
+			toColor[0]=Color.white;
+			toColor[1]=Color.orange;
+			toFill[0]=gp.getCalcul().getTileSize();
+			toFill[1]=(int) (gp.getCalcul().getTileSize()/2);
+			toFill[2]=gp.getCalcul().getTileSize();
+			toFill[3]=(int) (gp.getCalcul().getTileSize()/2);
+	
+			for (int i=0;i<2;i++) {
+				g.setColor(toColor[i]);
+				g.fillRect((int)(toPaint[i].getX()*dx),toPaint[i].getY(),toFill[i],toFill[i+2]);
+	
+			}
 		}
-		g2.dispose(); //aide pour le calcul en abandonnant les tache
 	}
 		
 		
 	
-	public void update() {
-		gp.update();
-	}
+	
 }

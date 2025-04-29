@@ -19,7 +19,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class GamePanel extends JPanel implements Runnable,WindowListener{
+public class GamePanel extends Thread implements Runnable {
 
 	Controller calcul = new Controller();
 	KeyHandler keyH = new KeyHandler();
@@ -27,7 +27,6 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	///Initialisation//////////////////////////////////////////////////////////////////
 
 
-	Thread gameThread; //start ou stop, s'occupe de la clock
 
 
 
@@ -65,7 +64,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	Ballon ballon = new Ballon(vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon,terrain);
 	BallonMoovSet ballonMoovset = new BallonMoovSet(ballon);
 	Vector offSet = new Vector(10,10);
-	JPanelDessin dessin = new JPanelDessin();
+	JPanelDessin dessin ;
 	
 	//autre nécéssaires
 
@@ -74,16 +73,11 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 	
 	////Code////////////////////////////////////////////////////////////////
 
-	public GamePanel() {
-		System.out.println("started");
-		this.setDoubleBuffered(true); //paramètre pour optimisation
-		this.addKeyListener(keyH); //reconnait keyH comme donneur d'entrée
+	public GamePanel(JPanelDessin dessin ) {
+		this.dessin=dessin;
+
 	}
 
-	public void startGameThread() { //Game Thread
-		gameThread = new Thread(this);
-		gameThread.start();
-	}
 
 	@Override
 	public void run() { //créer par le thread, gameloop, selon gagneux mettre dans simulateur
@@ -94,20 +88,25 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 		double delta = 0; // on est en train de créer le séquencage
 		long lastTime = System.nanoTime();
 		long currentTime;
-		while(gameThread != null) {
+		while(true) {
 
 			currentTime = System.nanoTime();
 			delta+= (currentTime - lastTime)/drawInterval;
 			lastTime=currentTime;
-
 			if (delta>=1) {
 				//update
-				dessin.update();
+				this.update();
 
 				//dessine
 				dessin.repaint();
 
 				delta --;
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
@@ -116,7 +115,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 		//Pour corriger le code
 
-
+		System.out.println("calcul");
 		//Paramétrage des clés pour partie joueur
 		if (keyH.qPressed == true && !keyH.aPressed) { //aller à gauche
 			joueur1Moovset.moovLeft();
@@ -253,40 +252,7 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 
 
-	@Override
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
 
-	@Override
-	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-	}
 	//accesseurs
 
 	public Controller getCalcul() {
@@ -303,14 +269,6 @@ public class GamePanel extends JPanel implements Runnable,WindowListener{
 
 	public void setKeyH(KeyHandler keyH) {
 		this.keyH = keyH;
-	}
-
-	public Thread getGameThread() {
-		return gameThread;
-	}
-
-	public void setGameThread(Thread gameThread) {
-		this.gameThread = gameThread;
 	}
 
 	public int getCharPosX() {
