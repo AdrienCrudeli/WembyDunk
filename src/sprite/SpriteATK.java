@@ -17,8 +17,10 @@ import sprite.SpriteATK;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 
 
@@ -28,33 +30,28 @@ import player.PlayerMoovset;
 import InterfaceGraphique.JPanelDessin;
 
 public class SpriteATK extends PlayerMoovset {
+	
+	private BufferedImage spriteStandBall,
+	spriteDribbleStand,spriteDribbleRun,spriteShoot
+	,spriteShootAv,spriteShootAr,spriteStand,spriteRun;;// Image des sprites
+	 
 	GamePanel gp;
 	KeyHandler keyH;
 	public SpriteATK(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;
 		}
-
-public void draw(Graphics g) {
-	JPanelDessin.setBackground(Color.black);
-
-	if(gp!=null) {
-		double dx = (double)JPanelDessin.getWidth()/gp.getCalcul().getScreenWidth();
-		JPanelDessin.toPaint[0]=gp.getJoueur1().getVecteurPosition(); 
-		JPanelDessin.toPaint[1]=gp.getBallon().getVecteurPosition();
-		JPanelDessin.toColor[0]=Color.white;
-		JPanelDessin.toColor[1]=Color.orange;
-		JPanelDessin.toFill[0]=gp.getCalcul().getTileSize();
-		JPanelDessin.toFill[1]=(int) (gp.getCalcul().getTileSize()/2);
-		JPanelDessin.toFill[2]=gp.JPanelDessin.getCalcul().getTileSize();
-		JPanelDessin.toFill[3]=(int) (gp.getCalcul().getTileSize()/2);
-
-		for (int i=0;i<2;i++) {
-			g.setColor(JPanelDessin.toColor[i]);
-			g.fillRect((int)(JPanelDessin.toPaint[i].getX()*dx),JPanelDessin.toPaint[i].getY(),JPanelDessin.toFill[i],JPanelDessin.toFill[i+2]);
-
+	public void GetATKImage() {
+		try {
+			spriteStandBall = ImageIO.read(getClass().getResource(""));
 		}
 	}
-}}
+	
+	public void draw(Graphics g) {
+
+
+	}
+}
+
 	
 
