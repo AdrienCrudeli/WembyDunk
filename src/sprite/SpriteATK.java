@@ -36,7 +36,8 @@ public class SpriteATK extends PlayerMoovset {
 	
 	private BufferedImage spriteStandBall,
 	spriteDribbleStand,
-	spriteDribbleRun,
+	spriteDribbleRunD,
+	spriteDribbleRunG,
 	spriteShoot,
 	spriteShootAv,
 	spriteShootAr,
@@ -59,7 +60,8 @@ public class SpriteATK extends PlayerMoovset {
 		try {
 			setSpriteStandBall(ImageIO.read(getClass().getResource("/sprite/ATKHBall.png")));
 			setSpriteDribbleStand(ImageIO.read(getClass().getResource("/sprite/ATKDribbleStand.png")));
-			setSpriteDribbleRun(ImageIO.read(getClass().getResource("/sprite/ATKDribbleRun.png")));
+			setSpriteDribbleRunD(ImageIO.read(getClass().getResource("/sprite/ATKDribbleRunD.png")));
+			setSpriteDribbleRunG(ImageIO.read(getClass().getResource("/sprite/ATKDribbleRunG.png")));
 			setSpriteShoot(ImageIO.read(getClass().getResource("sprite/ATKShoot.png")));
 			setSpriteShootAv(ImageIO.read(getClass().getResource("sprite/ATKShootForward.png")));
 			setSpriteShootAr(ImageIO.read(getClass().getResource("sprite/ATKShootFade.png")));
@@ -100,7 +102,7 @@ public class SpriteATK extends PlayerMoovset {
 	public void draw(Graphics g) {
 		 // Timer pour le mouvement et l'animation
 	     
-		timerstand = new Timer(250, this);
+		timerstand = new Timer(250, this);// problème action listener
 	    timerstand.start();
 		BufferedImage image = null;
 		if(fmove == false && action == null) {//gp.getJoueur1().getVecteurPosition().getX()*dx;
@@ -112,6 +114,14 @@ public class SpriteATK extends PlayerMoovset {
 		else if(action == "gauche") {
 			image = spriteDribbleStand.getSubimage(frameIndex * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 		}
+		else if (action == "gaucheD") {
+			image = spriteDribbleRunG.getSubimage(frameIndex * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+		}
+		else if (action == "droiteD") {
+			image = spriteDribbleRunD.getSubimage(frameIndex * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+		}
+		
+		g.drawImage(image, x, y, 64, 64, this);//ajouter x et y et la taille du sprite ( ici 64x64)
 	}
 	
 	//accesseurs
