@@ -34,7 +34,7 @@ import InterfaceGraphique.JPanelDessin;
 public class SpriteATK extends PlayerMoovset {
 	
 	
-	private BufferedImage spriteStandBall,
+	public BufferedImage spriteStandBall,
 	spriteDribbleStand,
 	spriteDribbleRunD,
 	spriteDribbleRunG,
@@ -45,9 +45,9 @@ public class SpriteATK extends PlayerMoovset {
 	spriteRun;// Image des sprites
 	public String action = "droite";
 	public boolean fmove = false;
-	private int frameIndex = 0;    // Index de l'animation
+	public int frameIndex = 0;    // Index de l'animation
 	private Timer timerstand;
-	private final int SPRITE_SIZE = 32;
+	public final int SPRITE_SIZE = 32;
 	 
 	GamePanel gp;
 	KeyHandler keyH;
@@ -58,15 +58,15 @@ public class SpriteATK extends PlayerMoovset {
 
 	public void GetATKImage() {
 		try {
-			setSpriteStandBall(ImageIO.read(getClass().getResource("/sprite/ATKHBall.png")));
-			setSpriteDribbleStand(ImageIO.read(getClass().getResource("/sprite/ATKDribbleStand.png")));
-			setSpriteDribbleRunD(ImageIO.read(getClass().getResource("/sprite/ATKDribbleRunD.png")));
-			setSpriteDribbleRunG(ImageIO.read(getClass().getResource("/sprite/ATKDribbleRunG.png")));
-			setSpriteShoot(ImageIO.read(getClass().getResource("sprite/ATKShoot.png")));
-			setSpriteShootAv(ImageIO.read(getClass().getResource("sprite/ATKShootForward.png")));
-			setSpriteShootAr(ImageIO.read(getClass().getResource("sprite/ATKShootFade.png")));
-			setSpriteStand(ImageIO.read(getClass().getResource("sprite/ATKStand.png")));
-			setSpriteRun(ImageIO.read(getClass().getResource("sprite/ATKRun.png")));
+			spriteStandBall = ImageIO.read(getClass().getResource("/sprite/ATKHBall.png"));
+			spriteDribbleStand = ImageIO.read(getClass().getResource("/sprite/ATKDribbleStand.png"));
+			spriteDribbleRunD = ImageIO.read(getClass().getResource("/sprite/ATKDribbleRunD.png"));
+			spriteDribbleRunG =ImageIO.read(getClass().getResource("/sprite/ATKDribbleRunG.png"));
+			spriteShoot = ImageIO.read(getClass().getResource("sprite/ATKShoot.png"));
+			spriteShootAv = ImageIO.read(getClass().getResource("sprite/ATKShootForward.png"));
+			spriteShootAr = ImageIO.read(getClass().getResource("sprite/ATKShootFade.png"));
+			spriteStand = ImageIO.read(getClass().getResource("sprite/ATKStand.png"));
+			spriteRun = ImageIO.read(getClass().getResource("sprite/ATKRun.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 			}
@@ -102,7 +102,7 @@ public class SpriteATK extends PlayerMoovset {
 	public void draw(Graphics g) {
 		 // Timer pour le mouvement et l'animation
 	     
-		timerstand = new Timer(250, this);// problème action listener
+		timerstand = new Timer(250,(ActionListener) this);// problème action listener
 	    timerstand.start();
 		BufferedImage image = null;
 		if(fmove == false && action == null) {//gp.getJoueur1().getVecteurPosition().getX()*dx;
@@ -124,57 +124,6 @@ public class SpriteATK extends PlayerMoovset {
 		g.drawImage(image, x, y, 64, 64, this);//ajouter x et y et la taille du sprite ( ici 64x64)
 	}
 	
-	//accesseurs
-
-	public BufferedImage getSpriteRun() {
-		return spriteRun;
-	}
-	public void setSpriteRun(BufferedImage spriteRun) {
-		this.spriteRun = spriteRun;
-	}
-	public BufferedImage getSpriteStand() {
-		return spriteStand;
-	}
-	public void setSpriteStand(BufferedImage spriteStand) {
-		this.spriteStand = spriteStand;
-	}
-	public BufferedImage getSpriteShootAr() {
-		return spriteShootAr;
-	}
-	public void setSpriteShootAr(BufferedImage spriteShootAr) {
-		this.spriteShootAr = spriteShootAr;
-	}
-	public BufferedImage getSpriteShootAv() {
-		return spriteShootAv;
-	}
-	public void setSpriteShootAv(BufferedImage spriteShootAv) {
-		this.spriteShootAv = spriteShootAv;
-	}
-	public BufferedImage getSpriteShoot() {
-		return spriteShoot;
-	}
-	public void setSpriteShoot(BufferedImage spriteShoot) {
-		this.spriteShoot = spriteShoot;
-	}
-	public BufferedImage getSpriteDribbleRun() {
-		return spriteDribbleRun;
-	}
-	public void setSpriteDribbleRun(BufferedImage spriteDribbleRun) {
-		this.spriteDribbleRun = spriteDribbleRun;
-	}
-	public BufferedImage getSpriteStandBall() {
-		return spriteStandBall;
-	}
-	public void setSpriteStandBall(BufferedImage spriteStandBall) {
-		this.spriteStandBall = spriteStandBall;
-	}
-	public BufferedImage getSpriteDribbleStand() {
-		return spriteDribbleStand;
-	}
-	public void setSpriteDribbleStand(BufferedImage spriteDribbleStand) {
-		this.spriteDribbleStand = spriteDribbleStand;
-	}
-}
 
 	
 
