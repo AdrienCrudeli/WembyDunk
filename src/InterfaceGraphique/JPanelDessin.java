@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import Calculator.Vector;
 import Test_codeur.GamePanel;
-import jdk.internal.org.jline.reader.impl.history.DefaultHistory;
+
 import sprite.SpriteATK;
 
 import java.awt.BorderLayout;
@@ -40,7 +40,7 @@ public class JPanelDessin extends JPanel {
 	}
 	protected void paintComponent(Graphics g) { //classe qui repaint //attention null
 		super.paintComponents(g); //classe parental
-		System.out.println("dessin");
+		
 		this.setBackground(Color.black);
 
 		if(gp!=null) {

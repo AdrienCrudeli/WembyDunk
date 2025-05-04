@@ -115,7 +115,7 @@ public void start() {
 
 		//Pour corriger le code
 
-		System.out.println("calcul");
+	
 		//Paramétrage des clés pour partie joueur
 		if (keyH.qPressed == true && !keyH.aPressed) { //aller à gauche
 			joueur1Moovset.moovLeft();
@@ -217,6 +217,7 @@ public void start() {
 		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-90) {
 			ballon.getTerrain().resetGravityBallon();
 			ballon.changeCollidedY();
+			ballonMoovset.getBallon().getTerrain().setVecteurGravitéBallon(ballonMoovset.getBallon().getTerrain().getVecteurGravitéBallon().lambda(uBallon));
 		}
 
 		
@@ -225,6 +226,7 @@ public void start() {
 	}
 		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-80) {
 			ballon.getVecteurPosition().setY(calcul.getScreenHeight()-70);
+			ballon.getTerrain().setVecteurGravitéBallon(ballon.getTerrain().getVecteurGravitéBallon());
 		}
 
 
