@@ -105,7 +105,7 @@ public class SpriteATK extends PlayerMoovset {
 		timerstand = new Timer(250,(ActionListener) this);// problème action listener
 	    timerstand.start();
 		BufferedImage image = null;
-		if(fmove == false && action == null) {//gp.getJoueur1().getVecteurPosition().getX()*dx;
+		if(fmove == false && action == null) {
 			image = spriteStandBall.getSubimage(frameIndex * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 		}
 		else if(action =="droite") {

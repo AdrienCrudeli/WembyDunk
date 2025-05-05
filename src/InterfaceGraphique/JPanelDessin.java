@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import Calculator.Vector;
 import Test_codeur.GamePanel;
+import Test_codeur.KeyHandler;
 import jdk.internal.org.jline.reader.impl.history.DefaultHistory;
 import sprite.SpriteATK;
 
@@ -26,9 +27,10 @@ public class JPanelDessin extends JPanel {
 	
 	public Vector[] toPaint = new Vector[2];
 	public Color[]  toColor = new Color[2];
-	private GamePanel gp ;
+	public GamePanel gp ;
 	public int[] toFill = new int[4];
-	//SpriteATK spriteATK = new SpriteATK(this,); //j'ai besoin de mettre le keyhandler je n'y arrive pas
+	public KeyHandler keyH;
+	SpriteATK spriteATK = new SpriteATK(gp, keyH);
 	
 	
 	public void setGp(GamePanel gp) {
@@ -60,7 +62,7 @@ public class JPanelDessin extends JPanel {
 	
 			}
 			/*
-			 * Graphics2D g2 = (Graphics2D)g;
+			 Graphics2D g2 = (Graphics2D)g;
 
 			SpriteATK.draw(g2);
 			g2.dispose();
