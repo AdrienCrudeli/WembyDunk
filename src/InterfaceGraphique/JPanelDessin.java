@@ -61,12 +61,12 @@ public class JPanelDessin extends JPanel {
 				g.fillRect((int)(toPaint[i].getX()*dx),toPaint[i].getY(),toFill[i],toFill[i+2]);
 	
 			}
-			/*
+			
 			 Graphics2D g2 = (Graphics2D)g;
 
-			SpriteATK.draw(g2);
+			spriteATK.draw(g2);
 			g2.dispose();
-			*/
+			
 		}
 	}
 		

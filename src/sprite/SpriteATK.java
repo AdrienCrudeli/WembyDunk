@@ -22,6 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
@@ -31,7 +32,7 @@ import Test_codeur.KeyHandler;
 import player.PlayerMoovset;
 import InterfaceGraphique.JPanelDessin;
 
-public class SpriteATK extends PlayerMoovset {
+public class SpriteATK extends PlayerMoovset implements ImageObserver, ActionListener {
 	
 	
 	public BufferedImage spriteStandBall,
@@ -71,6 +72,8 @@ public class SpriteATK extends PlayerMoovset {
 		}catch(IOException e) {
 			e.printStackTrace();
 			}
+		 timerstand = new Timer(250, this);
+	     timerstand.start();
 	}
 	
 	public String action() {
@@ -122,7 +125,7 @@ public class SpriteATK extends PlayerMoovset {
 			image = spriteDribbleRunD.getSubimage(frameIndex * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 		}
 		
-		g.drawImage(image, x, y, 64, 64, this);//ajouter x et y et la taille du sprite ( ici 64x64)
+		g.drawImage(image, 64, 64, 64, 64, this);//ajouter x et y et la taille du sprite ( ici 64x64)
 	}
 	
 
