@@ -30,6 +30,7 @@ public class BallonMoovSet {
 	final Vector forceInit = force;
 	public int forceMax = calcul.getInitForceMax();
 
+	public Vector mhu;
 	//constructeur
 	public BallonMoovSet(Ballon ballon) {
 		super();
@@ -39,6 +40,7 @@ public class BallonMoovSet {
 		dProportion=0;
 		sProportion=0;
 		qProportion=0;
+		this.mhu = new Vector((int) ballon.getU()*force.getSigneX(),(int) ballon.getU()*force.getSigneY());
 
 	}
 
@@ -104,15 +106,21 @@ public class BallonMoovSet {
 		if (ballon.collidedX) {
 			force.symetryX();
 			terrain.getVecteurGravitéBallon().symetryX();
+			ballon.setCollidedX(false);
 		}
 		if (ballon.collidedY) {
 			force.symetryY();
-			terrain.getVecteurGravitéBallon().symetryY();
+			terrain.resetGravityBallon();
+			ballon.setCollidedY(false);
 		}
+		
 		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force.lambda(-1)));
-		setForce(force.addition(force.lambda(-ballon.getU())));
+		if (force.norme()!=0) {
+		setForce(force.addition(force.scalar(mhu)));
+		}
+	
 		terrain.applieBallongravity(ballon);
-		System.out.println(force.toString());
+		System.out.println("vecteur force : "+force.toString());
 		
 	}
 

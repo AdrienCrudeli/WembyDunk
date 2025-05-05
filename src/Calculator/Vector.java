@@ -32,7 +32,7 @@ public class Vector {
 	}
 	
 	public Vector scalar(Vector v1) {
-		Vector v = new Vector(x*v1.getX(),y*v1.getY()) ;
+		Vector v = new Vector((int)x*v1.getX(),(int)y*v1.getY()) ;
 		return v;
 	}
 	public double norme() {
@@ -77,6 +77,22 @@ public class Vector {
 		setY(-y);
 	}
 	
+	public int getSigneX() {
+		if (x<0) {
+			return(-1);
+		}
+		else {
+			return(1);
+		}
+	}
+	public int getSigneY() {
+		if (y<0) {
+			return(-1);
+		}
+		else {
+			return(1);
+		}
+	}
 	//assesseurs
 	
 	public int getX() {

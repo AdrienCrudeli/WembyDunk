@@ -51,6 +51,7 @@ public class SpriteATK extends PlayerMoovset {
 	 
 	GamePanel gp;
 	KeyHandler keyH;
+
 	public SpriteATK(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
 		this.keyH = keyH;

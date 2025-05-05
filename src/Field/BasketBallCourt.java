@@ -38,12 +38,13 @@ public class BasketBallCourt {
 
 		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(vecteurGravitéBallon.lambda(1)));
 		setVecteurGravitéBallon(vecteurGravitéBallon.addition(vecteurAccGravitéBallon.lambda(-1)));
-		System.out.println("Vecteur = "+vecteurGravitéBallon.toString());
+		System.out.println("Vecteur gravité ballon = "+vecteurGravitéBallon.toString());
 		
 	}
 
 	public void imposeCollision(PlayerData joueur) {
 		joueur.setVecteurPosition(new Vector(joueur.getVecteurPosition().getX(),calcul.getScreenHeight()-106));
+		
 	}
 	public void imposeCollision(Ballon ballon) {
 		ballon.setVecteurPosition(new Vector(ballon.getVecteurPosition().getX(),calcul.getScreenHeight()-106));
