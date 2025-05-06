@@ -30,7 +30,7 @@ public class JPanelDessin extends JPanel {
 	public GamePanel gp ;
 	public int[] toFill = new int[4];
 	public KeyHandler keyH;
-	SpriteATK spriteATK = new SpriteATK(gp, keyH);
+	
 	
 	
 	public void setGp(GamePanel gp) {
@@ -64,7 +64,7 @@ public class JPanelDessin extends JPanel {
 			
 			 Graphics2D g2 = (Graphics2D)g;
 
-			spriteATK.draw(g2);
+			
 			g2.dispose();
 			
 		}
