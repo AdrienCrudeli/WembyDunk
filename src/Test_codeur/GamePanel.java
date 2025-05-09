@@ -52,6 +52,9 @@ public class GamePanel extends JPanel implements Runnable {
 	public double diamètreBallon = calcul.getInitDiameter(); //Diamètre du Ballon
 	public Vector gravityBallon = calcul.getGravityBallon();
 	public Vector accGravityBallon = calcul.getAccGravityBallon();
+	
+	double dx = 1;
+	double dy = 1;
 	/////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -64,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Ballon ballon = new Ballon(vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon,terrain);
 	BallonMoovSet ballonMoovset = new BallonMoovSet(ballon);
 	Vector offSet = new Vector(10,10);
-	JPanelDessin dessin ;
+	JPanelDessin dessin;
 	
 	//autre nécéssaires
 
@@ -77,6 +80,9 @@ public class GamePanel extends JPanel implements Runnable {
 		this.dessin=dessin;
 		this.setFocusable(true); // Make the panel focusable
 		this.addKeyListener(keyH); // Add the KeyHandler as a key listener
+		this.dx = dessin.getDx();
+		this.dy = dessin.getDy();
+		
 
 	}
 
@@ -141,7 +147,7 @@ public void start() {
 		}
 
 		//managment de la gravité
-		if (joueur1.getVecteurPosition().getY()<=calcul.getScreenHeight()-106) {
+		if (joueur1.getVecteurPosition().getY()<=(calcul.getScreenHeight()-106)*dy) {
 			terrain.applieGravity(joueur1Moovset); //si le joueur en l'air, on active la gravité
 
 			if (!joueur1Moovset.isInjump() || joueur1Moovset.getJoueur().getVecteurSaut().getY()<=0) {  
@@ -150,7 +156,7 @@ public void start() {
 			}
 		}
 
-		if(joueur1.getVecteurPosition().getY()>=calcul.getScreenHeight()-100) { //on reset la gravity les effets de l'accélération une ois au sol
+		if(joueur1.getVecteurPosition().getY()>=(calcul.getScreenHeight()-100)*dy) { //on reset la gravity les effets de l'accélération une ois au sol
 			terrain.resetGravity();
 
 		}
@@ -165,7 +171,7 @@ public void start() {
 			}
 		}
 
-		if (joueur1.getVecteurSaut().norme()==0 && joueur1.getVecteurPosition().getY()>=calcul.getScreenHeight()-106) {
+		if (joueur1.getVecteurSaut().norme()==0 && joueur1.getVecteurPosition().getY()>=(calcul.getScreenHeight()-106)*dy) {
 			joueur1.resetJump(); //on reset les effets liés au jump
 			joueur1.resetVitesse();
 			joueur1Moovset.setDiviseur(1);
@@ -173,16 +179,16 @@ public void start() {
 
 		}
 
-		if (joueur1.getVecteurPosition().getY()>calcul.getScreenHeight()-110) { //impose ligne collision
+		if (joueur1.getVecteurPosition().getY()>(calcul.getScreenHeight()-110)*dy) { //impose ligne collision
 
 			terrain.imposeCollision(joueur1);
 		}
 		
-		if (joueur1.getVecteurPosition().getX()>calcul.getScreenWidth()+420) {
-			joueur1.getVecteurPosition().setX(calcul.getScreenWidth()+400);;
+		if (joueur1.getVecteurPosition().getX()>(calcul.getScreenWidth()+420)*dx) {
+			joueur1.getVecteurPosition().setX((int) ((calcul.getScreenWidth()+400)*dx));;
 		}
-		if (joueur1.getVecteurPosition().getX()<-20) {
-			joueur1.getVecteurPosition().setX(0);;
+		if (joueur1.getVecteurPosition().getX()<(-20)*dx) {
+			joueur1.getVecteurPosition().setX((int)(0*dx));;
 		}
 
 		//Partie Ballon
@@ -242,10 +248,12 @@ public void start() {
 			ballonMoovset.setBallonFollowsPlayer(true);
 		}
 		
-		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+420) {
-			ballon.getVecteurPosition().setX(calcul.getScreenWidth()+400);;
+		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+offSet.norme()) {
+			ballon.getVecteurPosition().setX(calcul.getScreenWidth()-20);
+			System.out.println(ballon.getVecteurPosition().getX());
+			System.out.println(calcul.getScreenWidth()-100);
 		}
-		if (ballon.getVecteurPosition().getX()<-20) {
+		if (ballon.getVecteurPosition().getX()<0-offSet.norme()) {
 			ballon.getVecteurPosition().setX(0);;
 		}
 		

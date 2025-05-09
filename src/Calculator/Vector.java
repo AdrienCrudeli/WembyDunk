@@ -1,5 +1,7 @@
 package Calculator;
 
+import Ballon.BallonMoovSet;
+
 public class Vector {
 
 	public int x;
@@ -8,7 +10,6 @@ public class Vector {
 	
 
 	public Vector(int x, int y) {
-		super();
 		this.x = x;
 		this.y = y;
 	}
@@ -30,13 +31,14 @@ public class Vector {
 		Vector v = new Vector(nX,nY);
 		return v;
 	}
+
+	
 	
 	public Vector scalar(Vector v1) {
 		Vector v = new Vector((int)x*v1.getX(),(int)y*v1.getY()) ;
 		return v;
 	}
 	public double norme() {
-		
 		return Math.pow(Math.pow(x, 2)+Math.pow(y, 2),0.5);
 	}
 	
@@ -92,6 +94,11 @@ public class Vector {
 		else {
 			return(1);
 		}
+	}
+	
+	public void nulle() {
+		setX(0);
+		setY(0);
 	}
 	//assesseurs
 	

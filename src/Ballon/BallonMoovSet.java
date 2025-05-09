@@ -27,20 +27,28 @@ public class BallonMoovSet {
 	public boolean ballonFollowsPlayer=true;
 
 	public Vector force = new Vector(0,0);
+	public Vector forceInt = new Vector(0,0);
 	final Vector forceInit = force;
+	final Vector forceIntInit = force;
 	public int forceMax = calcul.getInitForceMax();
+	double forceOrd = 0;
+	double forceAbs = 0;
+	 
 
-	public Vector mhu;
+
+
 	//constructeur
 	public BallonMoovSet(Ballon ballon) {
 		super();
 		this.ballon = ballon;
+		this.forceOrd = 0;
+		this.forceAbs = 0;
 
 		zProportion=0;
 		dProportion=0;
 		sProportion=0;
 		qProportion=0;
-		this.mhu = new Vector((int) ballon.getU()*force.getSigneX(),(int) ballon.getU()*force.getSigneY());
+
 
 	}
 
@@ -70,6 +78,7 @@ public class BallonMoovSet {
 		timeSPressed =0;
 		timeQPressed =0;
 		
+
 		timeTot=0;
 		ballon.getTerrain().resetGravityBallon();
 
@@ -83,23 +92,25 @@ public class BallonMoovSet {
 		qProportion = (double) timeQPressed/timeTot;
 
 
-		double forceOrd = Math.round(zProportion*forceMax-sProportion*forceMax);
-
-		double forceAbs = -Math.round(dProportion*forceMax-qProportion*forceMax);
+		this.forceOrd = -zProportion*forceMax+sProportion*forceMax;
+		this.forceAbs = +dProportion*forceMax-qProportion*forceMax;
+		
 		int forceOrdInt = (int) forceOrd;
 		int forceAbsInt = (int) forceAbs;
+		
 		System.out.println(zProportion);
 		System.out.println(dProportion);
 		System.out.println(qProportion);
 		System.out.println(sProportion);
-
-
-		force.setX(forceAbsInt);
-		force.setY(forceOrdInt);
+	
+		forceInt.setX(forceAbsInt);
+		forceInt.setY(forceOrdInt);
 
 
 		deCharge();
 		System.out.println("vector force reset : " + force.toString());
+		System.out.println(forceOrd);
+		System.out.println(forceAbs);
 	}
 
 	public void moov(BasketBallCourt terrain) {
@@ -114,12 +125,24 @@ public class BallonMoovSet {
 			ballon.setCollidedY(false);
 		}
 		
-		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force.lambda(-1)));
+		int forceOrdInt = (int) forceOrd;
+		int forceAbsInt = (int) forceAbs;
+		forceInt.setX(forceAbsInt);
+		forceInt.setY(forceOrdInt);
+		
 		if (force.norme()!=0) {
-		setForce(force.addition(force.scalar(mhu)));
+	    forceAbs += -ballon.getU()*forceAbs;
+		forceOrd += -ballon.getU()*forceOrd;
+		
+		}
+		
+		if (force.norme()<1) {
+			force.nulle();
 		}
 	
 		terrain.applieBallongravity(ballon);
+		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force.lambda(1)));
+		System.out.println(force.norme());
 		System.out.println("vecteur force : "+force.toString());
 		
 	}
@@ -128,9 +151,13 @@ public class BallonMoovSet {
 	//assesseurs
 
 	public void resetForce() {
+		forceInt = forceIntInit;
 		force = forceInit;
 		ballon.setCollidedX(false);
 		ballon.setCollidedY(false);
+		forceAbs=0;
+		forceOrd=0;
+
 	}
 
 
