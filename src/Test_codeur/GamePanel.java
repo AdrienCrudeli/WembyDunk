@@ -10,6 +10,7 @@ import Field.BasketBallCourt;
 import InterfaceGraphique.JPanelDessin;
 import player.PlayerData;
 import player.PlayerMoovset;
+import Field.Panier;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,19 +40,30 @@ public class GamePanel extends JPanel implements Runnable {
 	Vector nulle = new Vector(0,0);
 
 	public Vector gravity = calcul.getVecteurGravité();
+	public Panier getPanier() {
+		return panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
+
 	public Vector accGravity = calcul.getVecteurAccGravité();
 	public int accJump=calcul.getAccJump();
 	public int initGravity = calcul.getInitGravity();
 	boolean asBeenPressed = false;
 
 	public ImageIcon imageBallon = calcul.getImageBallon(); //Image importé pointée via nom de fichier
-	public Vector vecteurPositionBallon = calcul.initVecteurPositionBallon;
+	public Vector vecteurPositionBallon = calcul.getInitVecteurPositionBallon();
 	public double vitesseBallon = calcul.getInitVit(); //Vitesse Ballon instant t
-
 	public double uBallon = calcul.getInitMhu(); //Coefficient viscosité dynamique
 	public double diamètreBallon = calcul.getInitDiameter(); //Diamètre du Ballon
 	public Vector gravityBallon = calcul.getGravityBallon();
 	public Vector accGravityBallon = calcul.getAccGravityBallon();
+	
+	public Vector vecteurPositionPanier =calcul.getInitVecteurPositionPanier();
+	public int largeurPanier = calcul.getInitLargPanier();
+	public int longueurPanier = calcul.getInitLongeurPanier();
 	
 	double dx = 1;
 	double dy = 1;
@@ -67,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Ballon ballon = new Ballon(vecteurPositionBallon,vitesseBallon,uBallon,diamètreBallon,terrain);
 	BallonMoovSet ballonMoovset = new BallonMoovSet(ballon);
 	Vector offSet = new Vector(10,10);
+	Panier panier = new Panier(vecteurPositionPanier, largeurPanier,longueurPanier);
 	JPanelDessin dessin;
 	
 	//autre nécéssaires

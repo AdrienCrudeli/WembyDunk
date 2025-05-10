@@ -1,30 +1,41 @@
 package Field;
 
-public class Panier {
+import Calculator.Vector;
 
-	public int x;
-	public int y;
+public class Panier {
+	
+	public Vector vecteurPosition;
+	public boolean collidedX = false;
+	public boolean collidedY = false;
 	public double largeur;
 	public double longueur;
-	public Panier(int x, int y, double largeur, double longueur) {
+	public Panier(Vector vecteurPosition, double largeur, double longueur) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.vecteurPosition = vecteurPosition;
 		this.largeur = largeur;
 		this.longueur = longueur;
 	}
-	public int getX() {
-		return x;
+
+
+	public Vector getVecteurPosition() {
+		return vecteurPosition;
 	}
-	public void setX(int x) {
-		this.x = x;
+	public void setVecteurPosition(Vector vecteurPosition) {
+		this.vecteurPosition = vecteurPosition;
 	}
-	public int getY() {
-		return y;
+	public boolean isCollidedX() {
+		return collidedX;
 	}
-	public void setY(int y) {
-		this.y = y;
+	public void setCollidedX(boolean collidedX) {
+		this.collidedX = collidedX;
 	}
+	public boolean isCollidedY() {
+		return collidedY;
+	}
+	public void setCollidedY(boolean collidedY) {
+		this.collidedY = collidedY;
+	}
+
 	public double getLargeur() {
 		return largeur;
 	}

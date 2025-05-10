@@ -50,6 +50,12 @@ public class Controller{
 	public Vector vecteurGravité = new Vector(0,gravity);
 	public Vector vecteurAccGravité = new Vector(0,accGravity);
 
+	//Paramètre panier/////////////////////////////////////////////////////////////////////////////////////
+
+	public int initLargPanier = 500;
+	public int initLongeurPanier = 200;
+	public Vector initVecteurPositionPanier = new Vector(975,250);
+
 	//Calculs bruts
 
 	//assesseurs
@@ -58,6 +64,24 @@ public class Controller{
 
 	public int getFPS() {
 		return FPS;
+	}
+	public int getInitLargPanier() {
+		return initLargPanier;
+	}
+	public void setInitLargPanier(int initLargPanier) {
+		this.initLargPanier = initLargPanier;
+	}
+	public int getInitLongeurPanier() {
+		return initLongeurPanier;
+	}
+	public void setInitLongeurPanier(int initLongeurPanier) {
+		this.initLongeurPanier = initLongeurPanier;
+	}
+	public Vector getInitVecteurPositionPanier() {
+		return initVecteurPositionPanier;
+	}
+	public void setInitVecteurPositionPanier(Vector initVecteurPositionPanier) {
+		this.initVecteurPositionPanier = initVecteurPositionPanier;
 	}
 	public Vector getVecteurGravité() {
 		return vecteurGravité;
