@@ -45,7 +45,7 @@ public class JPanelDessin extends JPanel {
 	}
 
 	protected void paintComponent(Graphics g) { //classe qui repaint //attention null
-		super.paintComponents(g); //classe parental
+		super.paintComponent(g); //classe parental
 		
 		this.setBackground(Color.black);
 
