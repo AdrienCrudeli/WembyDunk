@@ -67,7 +67,7 @@ public class JPanelDessin extends JPanel {
 			g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),toFill[0],toFill[1]); 
 			for (int i=0;i<2;i++) {
 				g.setColor(toColor[i]);
-				g.fillRect((int)(toPaint[i].getX()*dx),(int) (toPaint[i].getY()*dy),toFill[i],toFill[i+2]);
+				g.fillRect((int)(toPaint[i].getX()*dx),(int) (toPaint[i].getY()*dy),(int) (toFill[i]*dx),(int) (toFill[i+2]*dy));
 	
 			}
 			
