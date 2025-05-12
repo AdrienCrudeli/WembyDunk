@@ -38,7 +38,7 @@ public class BasketBallCourt {
 
 		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(vecteurGravitéBallon.lambda(1)));
 		setVecteurGravitéBallon(vecteurGravitéBallon.addition(vecteurAccGravitéBallon.lambda(-1)));
-		System.out.println("Vecteur gravité ballon = "+vecteurGravitéBallon.toString());
+		
 		
 	}
 

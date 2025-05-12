@@ -14,8 +14,8 @@ public class Controller{
 	final int tileSize = originalTileSize * scale; //taille cellules après fonction échelle
 	final int maxScreenColumn = 16; //combien de cellule on affiche en colonne
 	final int maxScreenRow = 12; //combien de cellule on affiche en ligne
-	final int screenWidth = tileSize * maxScreenColumn;
-	final int screenHeight = tileSize * maxScreenRow;
+	final int screenWidth = 1920;
+	final int screenHeight = 1080;
 
 	//FPS
 	int FPS = 60;
@@ -28,6 +28,7 @@ public class Controller{
 	public int initSaut = 60;
 	public int accJump=5;
 	public double dividedVit = 1; //vitesse diviseur dans le saut
+	public Vector taillePerso = new Vector(50,50);
 
 	//paramètre Ballon/////////////////////////////////////////////////////////////////////////////////////
 
@@ -41,6 +42,7 @@ public class Controller{
 	public int accGravitéBallon = 2;
 	public Vector accGravityBallon = new Vector(0,-accGravitéBallon);
 	public Vector gravityBallon = new Vector(0,-gravitéBallon);
+	public Vector tailleBallon = new Vector(20,20);
 
 	//Paramètre terrain/////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,12 +51,14 @@ public class Controller{
 	public int gravity=initGravity;
 	public Vector vecteurGravité = new Vector(0,gravity);
 	public Vector vecteurAccGravité = new Vector(0,accGravity);
+	
 
 	//Paramètre panier/////////////////////////////////////////////////////////////////////////////////////
 
 	public int initLargPanier = 500;
 	public int initLongeurPanier = 200;
-	public Vector initVecteurPositionPanier = new Vector(975,250);
+	public Vector initVecteurPositionPanier = new Vector(screenWidth-100,250);
+	public Vector taillePanier = new Vector(100,20);
 
 	//Calculs bruts
 

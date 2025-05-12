@@ -240,7 +240,7 @@ public void start() {
 		}
 
 		
-		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+400|| ballon.getVecteurPosition().getX()<0 ) {
+		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+offSet.norme()|| ballon.getVecteurPosition().getX()<0-offSet.norme()) {
 		ballon.changeCollidedX();
 	}
 		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-80) {
@@ -263,8 +263,7 @@ public void start() {
 		
 		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+offSet.norme()) {
 			ballon.getVecteurPosition().setX(calcul.getScreenWidth()-20);
-			System.out.println(ballon.getVecteurPosition().getX());
-			System.out.println(calcul.getScreenWidth()-100);
+
 		}
 		if (ballon.getVecteurPosition().getX()<0-offSet.norme()) {
 			ballon.getVecteurPosition().setX(0);;

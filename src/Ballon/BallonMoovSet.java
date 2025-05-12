@@ -98,19 +98,14 @@ public class BallonMoovSet {
 		int forceOrdInt = (int) forceOrd;
 		int forceAbsInt = (int) forceAbs;
 		
-		System.out.println(zProportion);
-		System.out.println(dProportion);
-		System.out.println(qProportion);
-		System.out.println(sProportion);
+
 	
 		forceInt.setX(forceAbsInt);
 		forceInt.setY(forceOrdInt);
 
 
 		deCharge();
-		System.out.println("vector force reset : " + force.toString());
-		System.out.println(forceOrd);
-		System.out.println(forceAbs);
+
 	}
 
 	public void moov(BasketBallCourt terrain) {
@@ -142,8 +137,7 @@ public class BallonMoovSet {
 	
 		terrain.applieBallongravity(ballon);
 		ballon.setVecteurPosition(ballon.getVecteurPosition().addition(force.lambda(1)));
-		System.out.println(force.norme());
-		System.out.println("vecteur force : "+force.toString());
+
 		
 	}
 

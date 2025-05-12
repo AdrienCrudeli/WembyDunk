@@ -28,7 +28,8 @@ public class JPanelDessin extends JPanel {
 	public Vector[] toPaint = new Vector[3];
 	public Color[]  toColor = new Color[3];
 	public GamePanel gp ;
-	public int[] toFill = new int[4];
+	public int[] toFill = new int[6];
+	public String[] name = new String[3];
 	public KeyHandler keyH;
 	double dx=1;
 	double dy=1;
@@ -52,24 +53,34 @@ public class JPanelDessin extends JPanel {
 		if(gp!=null) {
 			setDx((double)this.getWidth()/gp.getCalcul().getScreenWidth());
 			setDy((double)this.getHeight()/gp.getCalcul().getScreenHeight());
-			
+			name[0]="joueur";
+			name[1]="ballon";
+			name[2]="panier";
 			toPaint[0]=gp.getJoueur1().getVecteurPosition(); 
 			toPaint[1]=gp.getBallon().getVecteurPosition();
 			toPaint[2]=gp.getPanier().getVecteurPosition();
 			toColor[0]=Color.white;
 			toColor[1]=Color.orange;
 			toColor[2]=Color.blue;
-			toFill[0]= (int) (gp.getCalcul().getTileSize()*dx);
-			toFill[1]=(int) ((gp.getCalcul().getTileSize()/2)*dy);
-			toFill[2]=(int) (gp.getCalcul().getTileSize()*dx);
-			toFill[3]=(int) ((gp.getCalcul().getTileSize()/2)*dy);
+			toFill[0]= (int) ((gp.getCalcul().taillePerso.getX()));
+			toFill[1]=(int) ((gp.getCalcul().taillePerso.getY())); 
+			toFill[2]=(int) ((gp.getCalcul().tailleBallon.getX()));
+			toFill[3]=(int) ((gp.getCalcul().tailleBallon.getY()));
+			toFill[4]=(int) ((gp.getCalcul().taillePanier.getX()));
+			toFill[5]=(int) ((gp.getCalcul().taillePanier.getY()));
+			
+			g.setColor(toColor[0]);
+			g.fillRect((int)(toPaint[0].getX()*dx),(int) (toPaint[0].getY()*dy),(int) (toFill[0]*dx),(int) (toFill[1]*dy));
+			g.setColor(toColor[1]);
+			g.fillRect((int)(toPaint[1].getX()*dx),(int) (toPaint[1].getY()*dy),(int) (toFill[2]*dx),(int) (toFill[3]*dy));
 			g.setColor(toColor[2]);
-			g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),toFill[0],toFill[1]); 
-			for (int i=0;i<2;i++) {
-				g.setColor(toColor[i]);
-				g.fillRect((int)(toPaint[i].getX()*dx),(int) (toPaint[i].getY()*dy),(int) (toFill[i]*dx),(int) (toFill[i+2]*dy));
+			g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),(int) (toFill[4]*dx),(int) (toFill[5]*dy));
+		
+				
+			
+				
 	
-			}
+			
 			
 			 Graphics2D g2 = (Graphics2D)g;
 
