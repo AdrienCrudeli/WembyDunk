@@ -59,6 +59,7 @@ public class Controller{
 	public int initLongeurPanier = 200;
 	public Vector initVecteurPositionPanier = new Vector(screenWidth-100,250);
 	public Vector taillePanier = new Vector(100,20);
+	public int initCompteur = 0;
 
 	//Calculs bruts
 
@@ -66,6 +67,12 @@ public class Controller{
 	
 	
 
+	public int getInitCompteur() {
+		return initCompteur;
+	}
+	public void setInitCompteur(int initCompteur) {
+		this.initCompteur = initCompteur;
+	}
 	public int getFPS() {
 		return FPS;
 	}

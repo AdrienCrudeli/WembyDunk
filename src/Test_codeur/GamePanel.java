@@ -40,13 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Vector nulle = new Vector(0,0);
 
 	public Vector gravity = calcul.getVecteurGravité();
-	public Panier getPanier() {
-		return panier;
-	}
 
-	public void setPanier(Panier panier) {
-		this.panier = panier;
-	}
 
 	public Vector accGravity = calcul.getVecteurAccGravité();
 	public int accJump=calcul.getAccJump();
@@ -60,11 +54,13 @@ public class GamePanel extends JPanel implements Runnable {
 	public double diamètreBallon = calcul.getInitDiameter(); //Diamètre du Ballon
 	public Vector gravityBallon = calcul.getGravityBallon();
 	public Vector accGravityBallon = calcul.getAccGravityBallon();
-	
+
 	public Vector vecteurPositionPanier =calcul.getInitVecteurPositionPanier();
 	public int largeurPanier = calcul.getInitLargPanier();
 	public int longueurPanier = calcul.getInitLongeurPanier();
-	
+	public int compteur1 = calcul.getInitCompteur() ;
+	public boolean isCounted = false;
+
 	double dx = 1;
 	double dy = 1;
 	/////////////////////////////////////////////////////////////////////////////////////
@@ -81,12 +77,12 @@ public class GamePanel extends JPanel implements Runnable {
 	Vector offSet = new Vector(10,10);
 	Panier panier = new Panier(vecteurPositionPanier, largeurPanier,longueurPanier);
 	JPanelDessin dessin;
-	
+
 	//autre nécéssaires
 
 	public boolean pivot = false;
 
-	
+
 	////Code////////////////////////////////////////////////////////////////
 
 	public GamePanel(JPanelDessin dessin ) {
@@ -95,18 +91,18 @@ public class GamePanel extends JPanel implements Runnable {
 		this.addKeyListener(keyH); // Add the KeyHandler as a key listener
 		this.dx = dessin.getDx();
 		this.dy = dessin.getDy();
-		
+
 
 	}
 
-public void start() {
-	Thread t1 = new Thread(this);
-    t1.start();
-}
+	public void start() {
+		Thread t1 = new Thread(this);
+		t1.start();
+	}
 	@Override
 	public void run() { //créer par le thread, gameloop, selon gagneux mettre dans simulateur
 		// TODO Auto-generated method stub
-		
+
 
 		double drawInterval= 1000000000/calcul.getFPS(); //méthode des deltas pour faire attendre
 		double delta = 0; // on est en train de créer le séquencage
@@ -126,7 +122,7 @@ public void start() {
 
 				delta --;
 			}
-			
+
 		}
 	}
 
@@ -134,7 +130,7 @@ public void start() {
 
 		//Pour corriger le code
 
-	
+
 		//Paramétrage des clés pour partie joueur
 		if (keyH.qPressed == true && !keyH.aPressed) { //aller à gauche
 			joueur1Moovset.moovLeft();
@@ -196,7 +192,7 @@ public void start() {
 
 			terrain.imposeCollision(joueur1);
 		}
-		
+
 		if (joueur1.getVecteurPosition().getX()>(calcul.getScreenWidth()+420)*dx) {
 			joueur1.getVecteurPosition().setX((int) ((calcul.getScreenWidth()+400)*dx));;
 		}
@@ -231,7 +227,7 @@ public void start() {
 			ballonMoovset.setBallonFollowsPlayer(false);
 			ballonMoovset.launch();
 			pivot = false;
-			
+
 		}
 		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-90) {
 			ballon.getTerrain().resetGravityBallon();
@@ -239,10 +235,26 @@ public void start() {
 			ballonMoovset.getBallon().getTerrain().setVecteurGravitéBallon(ballonMoovset.getBallon().getTerrain().getVecteurGravitéBallon().lambda(uBallon));
 		}
 
-		
-		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+offSet.norme()|| ballon.getVecteurPosition().getX()<0-offSet.norme()) {
-		ballon.changeCollidedX();
-	}
+		if (ballon.getVecteurPosition().compare_intervalle(panier.getVecteurPosition(), 200,25) && isCounted == false) {
+		    compteur1 = compteur1 + 1;
+		    isCounted=true;
+		    new java.util.Timer().schedule( 
+			        new java.util.TimerTask() {
+			            @Override
+			            public void run() {
+			    		    isCounted = false;
+			            }
+			        }, 
+			        2000
+			    );
+		    System.out.println(compteur1);
+		}
+
+
+
+		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+offSet.norme()|| ballon.getVecteurPosition().getX()<0-offSet.norme() ) {
+			ballon.changeCollidedX();
+		}
 		if (ballon.getVecteurPosition().getY()>calcul.getScreenHeight()-80) {
 			ballon.getVecteurPosition().setY(calcul.getScreenHeight()-70);
 			ballon.getTerrain().setVecteurGravitéBallon(ballon.getTerrain().getVecteurGravitéBallon());
@@ -257,10 +269,10 @@ public void start() {
 			ballon.setVecteurPosition(joueur1.getVecteurPosition().addition(offSet));
 		}
 
-		if (!ballonMoovset.isBallonFollowsPlayer() && ballon.getVecteurPosition().compare_intervalle(joueur1.getVecteurPosition())) {
+		if (!ballonMoovset.isBallonFollowsPlayer() && ballon.getVecteurPosition().compare_intervalle(joueur1.getVecteurPosition(),32,32)) {
 			ballonMoovset.setBallonFollowsPlayer(true);
 		}
-		
+
 		if (ballon.getVecteurPosition().getX()>calcul.getScreenWidth()+offSet.norme()) {
 			ballon.getVecteurPosition().setX(calcul.getScreenWidth()-20);
 
@@ -268,14 +280,30 @@ public void start() {
 		if (ballon.getVecteurPosition().getX()<0-offSet.norme()) {
 			ballon.getVecteurPosition().setX(0);;
 		}
-		
-		}
+
+	}
 
 
 
 
 
 	//accesseurs
+
+	public int getCompteur1() {
+		return compteur1;
+	}
+
+	public void setCompteur1(int compteur1) {
+		this.compteur1 = compteur1;
+	}
+
+	public boolean isCounted() {
+		return isCounted;
+	}
+
+	public void setCounted(boolean isCounted) {
+		this.isCounted = isCounted;
+	}
 
 	public Controller getCalcul() {
 		return calcul;
@@ -484,7 +512,13 @@ public void start() {
 	public void setPivot(boolean pivot) {
 		this.pivot = pivot;
 	}
-	
+	public Panier getPanier() {
+		return panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
 }
 
 
