@@ -1,5 +1,9 @@
 package InterfaceGraphique;
 
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,7 +27,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class JPanelDessin extends JPanel {
+	BufferedImage playerImage;
+	double scalePlayer = 5.0;
+	double scaleBall = 10.0;
+	double scaleHoop = 16.0;
+	BufferedImage[] playerImages = new BufferedImage[4];
+	int currentFrame = 0;
+	int frameCounter = 0;
+	int frameDelay = 10; 
 	
+	BufferedImage ballImage;
+	BufferedImage backgroundImage;
+	BufferedImage hoopImage;
 	
 	public Vector[] toPaint = new Vector[3];
 	public Color[]  toColor = new Color[3];
@@ -41,15 +56,28 @@ public class JPanelDessin extends JPanel {
 		
 	}
 	public JPanelDessin () {
-		this.setBackground(Color.black);
-		this.setFocusable(true);
+		 this.setBackground(Color.black);
+		    this.setFocusable(true);
+		    try {
+		    	playerImages[0] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG1.png"));
+		    	playerImages[1] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG2.png"));
+		    	playerImages[2] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG3.png"));
+		    	playerImages[3] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG4.png"));
+		    	backgroundImage = ImageIO.read(getClass().getResource("/sprite/court1.png"));
+		    	hoopImage = ImageIO.read(getClass().getResource("/sprite/panier.png"));
+		    	ballImage = ImageIO.read(getClass().getResource("/sprite/Ball.png"));  // ton image de ballon
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		/*this.setBackground(Color.black);
+		this.setFocusable(true);*/
 	}
 
 	protected void paintComponent(Graphics g) { //classe qui repaint //attention null
 		super.paintComponent(g); //classe parental
 		
 		this.setBackground(Color.black);
-
+		
 		if(gp!=null) {
 			setDx((double)this.getWidth()/gp.getCalcul().getScreenWidth());
 			setDy((double)this.getHeight()/gp.getCalcul().getScreenHeight());
@@ -69,12 +97,76 @@ public class JPanelDessin extends JPanel {
 			toFill[4]=(int) ((gp.getCalcul().taillePanier.getX()));
 			toFill[5]=(int) ((gp.getCalcul().taillePanier.getY()));
 			
-			g.setColor(toColor[0]);
-			g.fillRect((int)(toPaint[0].getX()*dx),(int) (toPaint[0].getY()*dy),(int) (toFill[0]*dx),(int) (toFill[1]*dy));
-			g.setColor(toColor[1]);
-			g.fillRect((int)(toPaint[1].getX()*dx),(int) (toPaint[1].getY()*dy),(int) (toFill[2]*dx),(int) (toFill[3]*dy));
-			g.setColor(toColor[2]);
-			g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),(int) (toFill[4]*dx),(int) (toFill[5]*dy));
+			
+			 if (gp.getJoueur1().getVecteurVitesse().getX() != 0 || gp.getJoueur1().getVecteurVitesse().getY() != 0) {
+		            // Il bouge : on fait défiler les frames
+		            frameCounter++;
+		            if (frameCounter >= frameDelay) {
+		                currentFrame = (currentFrame + 1) % playerImages.length;
+		                frameCounter = 0;
+		            }
+		        } else {
+		            // Il est à l'arrêt : on affiche toujours la première image
+		            currentFrame = 0;
+		        }
+			 
+			 if (backgroundImage != null) {
+				    g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), null);
+				} else {
+				    // En cas de problème, tu peux mettre un fond noir
+				    g.setColor(Color.BLACK);
+				    g.fillRect(0, 0, this.getWidth(), this.getHeight());
+				}
+			 
+				/*g.setColor(toColor[1]);
+				g.fillRect((int)(toPaint[1].getX()*dx),(int) (toPaint[1].getY()*dy),(int) (toFill[2]*dx),(int) (toFill[3]*dy));*/
+				if (ballImage != null) {
+				    g.drawImage(ballImage,
+				        (int)(toPaint[1].getX()*dx),
+				        (int)(toPaint[1].getY()*dy - toFill[3]*dy*(scaleBall - 1)),
+				        (int)(toFill[2]*dx*8),
+				        (int)(toFill[3]*dy*8),
+				        null);
+				} else {
+				    g.setColor(toColor[1]);
+				    g.fillRect((int)(toPaint[1].getX()*dx),(int) (toPaint[1].getY()*dy),(int) (toFill[2]*dx),(int) (toFill[3]*dy));
+				}
+				 
+			/*g.setColor(toColor[0]);
+			g.fillRect((int)(toPaint[0].getX()*dx),(int) (toPaint[0].getY()*dy),(int) (toFill[0]*dx),(int) (toFill[1]*dy));*/
+			
+			/*g.drawImage(playerImage,
+				    (int)(toPaint[0].getX()*dx),
+				    (int)(toPaint[0].getY()*dy),
+				    (int)(toFill[0]*dx),
+				    (int)(toFill[1]*dy),
+				    null);*/
+			
+			if (playerImages[currentFrame] != null) {
+			    g.drawImage(playerImages[currentFrame],
+			        (int)(toPaint[0].getX()*dx),
+			        (int)(toPaint[0].getY()*dy - toFill[1]*dy*(scalePlayer - 1)),
+			        (int)(toFill[0]*dx*3),
+			        (int)(toFill[1]*dy*3),
+			        null);
+			}
+			
+
+			/*g.setColor(toColor[2]);
+			g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),(int) (toFill[4]*dx),(int) (toFill[5]*dy));*/
+			
+			if (hoopImage != null) {
+			    g.drawImage(hoopImage,
+			        (int)(toPaint[2].getX()*dx - toFill[5]*dy*(scaleHoop - 1)),
+			        (int)(toPaint[2].getY()*dy),
+			        (int)(toFill[4]*dx*5),  // Tu peux aussi agrandir comme pour les autres si besoin
+			        (int)(toFill[5]*dy*35),
+			        null);
+			} else {
+			    // Sécurité : si l'image ne se charge pas, on garde le carré bleu
+			    g.setColor(toColor[2]);
+			    g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),(int) (toFill[4]*dx),(int) (toFill[5]*dy));
+			}
 		
 				
 			
