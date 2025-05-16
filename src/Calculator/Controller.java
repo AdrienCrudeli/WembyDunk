@@ -35,14 +35,13 @@ public class Controller{
 	public Vector initVecteurPositionBallon = new Vector(0,0);
 	public int initVit = 0;
 	public double initMhu = 0.03;
-	public double initDiameter = 0.2419;
+	public double initDiameter = 150;
 	public ImageIcon imageBallon = new ImageIcon("Ballon.png");
 	public int initForceMax = 100;
 	public int gravitéBallon = 10;
 	public int accGravitéBallon = 2;
 	public Vector accGravityBallon = new Vector(0,-accGravitéBallon);
 	public Vector gravityBallon = new Vector(0,-gravitéBallon);
-	public Vector tailleBallon = new Vector(20,20);
 
 	//Paramètre terrain/////////////////////////////////////////////////////////////////////////////////////
 
@@ -57,8 +56,7 @@ public class Controller{
 
 	public int initLargPanier = 500;
 	public int initLongeurPanier = 200;
-	public Vector initVecteurPositionPanier = new Vector(screenWidth-100,250);
-	public Vector taillePanier = new Vector(100,20);
+	public Vector initVecteurPositionPanier = new Vector(screenWidth-250,400);
 	public int initCompteur = 0;
 
 	//Calculs bruts
@@ -70,6 +68,13 @@ public class Controller{
 	public int getInitCompteur() {
 		return initCompteur;
 	}
+	public Vector getTaillePerso() {
+		return taillePerso;
+	}
+	public void setTaillePerso(Vector taillePerso) {
+		this.taillePerso = taillePerso;
+	}
+
 	public void setInitCompteur(int initCompteur) {
 		this.initCompteur = initCompteur;
 	}

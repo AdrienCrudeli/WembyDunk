@@ -19,11 +19,7 @@ import java.awt.Graphics2D;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import javax.swing.JOptionPane;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import InterfaceGraphique.FrameMenuTest;
+
 public class GamePanel extends JPanel implements Runnable {
 
 	Controller calcul = new Controller();
@@ -41,7 +37,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public int charPosY = calcul.getInitCharPosY();
 	public int charVit = calcul.getInitVitChar(); 
 	public int jump = calcul.getInitSaut();
-	private InterfaceGraphique.FrameArcade frameArcade;
 	Vector nulle = new Vector(0,0);
 
 	public Vector gravity = calcul.getVecteurGravité();
@@ -65,9 +60,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public int longueurPanier = calcul.getInitLongeurPanier();
 	public int compteur1 = calcul.getInitCompteur() ;
 	public boolean isCounted = false;
-	
-	private boolean victoireDejaAffichee = false;
-	private boolean running = true;
 
 	double dx = 1;
 	double dy = 1;
@@ -93,9 +85,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 	////Code////////////////////////////////////////////////////////////////
 
-	public GamePanel(JPanelDessin dessin, InterfaceGraphique.FrameArcade frameArcade) {
+	public GamePanel(JPanelDessin dessin ) {
 		this.dessin=dessin;
-		this.frameArcade = frameArcade;
 		this.setFocusable(true); // Make the panel focusable
 		this.addKeyListener(keyH); // Add the KeyHandler as a key listener
 		this.dx = dessin.getDx();
@@ -107,7 +98,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public void start() {
 		Thread t1 = new Thread(this);
 		t1.start();
-		
 	}
 	@Override
 	public void run() { //créer par le thread, gameloop, selon gagneux mettre dans simulateur
@@ -118,7 +108,7 @@ public class GamePanel extends JPanel implements Runnable {
 		double delta = 0; // on est en train de créer le séquencage
 		long lastTime = System.nanoTime();
 		long currentTime;
-		while(running) {
+		while(true) {
 
 			currentTime = System.nanoTime();
 			delta+= (currentTime - lastTime)/drawInterval;
@@ -138,12 +128,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() { //classe qui met à jour
 
-		
-		///pour afficher le pop up si on a mis 1 panier changer la valeur si necessaire
-		if (compteur1 == 1 && !victoireDejaAffichee) {
-		    victoireDejaAffichee = true;
-		    afficherPopupVictoire();
-		}
+		//Pour corriger le code
+
 
 		//Paramétrage des clés pour partie joueur
 		if (keyH.qPressed == true && !keyH.aPressed) { //aller à gauche
@@ -262,12 +248,6 @@ public class GamePanel extends JPanel implements Runnable {
 			        2000
 			    );
 		    System.out.println(compteur1);
-		    frameArcade.updateScore(compteur1);
-		    
-		    ///// affichage du pop-up si on a mis 1 panier changer la valeur plus tard
-		    if (compteur1 == 1) {
-		        afficherPopupVictoire();
-		    }
 		}
 
 
@@ -308,6 +288,30 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 	//accesseurs
+
+	public Vector getVecteurPositionPanier() {
+		return vecteurPositionPanier;
+	}
+
+	public void setVecteurPositionPanier(Vector vecteurPositionPanier) {
+		this.vecteurPositionPanier = vecteurPositionPanier;
+	}
+
+	public int getLargeurPanier() {
+		return largeurPanier;
+	}
+
+	public void setLargeurPanier(int largeurPanier) {
+		this.largeurPanier = largeurPanier;
+	}
+
+	public int getLongueurPanier() {
+		return longueurPanier;
+	}
+
+	public void setLongueurPanier(int longueurPanier) {
+		this.longueurPanier = longueurPanier;
+	}
 
 	public int getCompteur1() {
 		return compteur1;
@@ -539,74 +543,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setPanier(Panier panier) {
 		this.panier = panier;
 	}
-	
-	
-	private void afficherPopupVictoire() {
-	    int choix = JOptionPane.showOptionDialog(
-	        this,
-	        "Bravo tu as gagné, veux-tu recommencer ?",
-	        "Victoire !",
-	        JOptionPane.YES_NO_OPTION,
-	        JOptionPane.INFORMATION_MESSAGE,
-	        null,
-	        new String[]{"Oui", "Non"},
-	        "Oui"
-	    );
-
-	    if (choix == JOptionPane.YES_OPTION) {
-	        recommencerPartie();
-	    } else if (choix == JOptionPane.NO_OPTION) {
-	        retournerMenu();
-	    }
-	}
-	
-	
-	
-	
-	
-	private void recommencerPartie() {
-	    compteur1 = 0;
-	    victoireDejaAffichee = false;
-	    // Reset joueur
-	    joueur1.setVecteurPosition(new Vector(calcul.getInitCharPosX(), calcul.getInitCharPosY()));
-	    joueur1.resetJump();
-	    joueur1.resetVitesse();
-
-	    // Reset ballon
-	    ballon.setVecteurPosition(calcul.getInitVecteurPositionBallon());
-	    ballonMoovset.setBallonFollowsPlayer(true);
-	    ballonMoovset.resetForce();
-	    ballon.getTerrain().resetGravityBallon();
-
-	    // Reset terrain si besoin
-	    terrain.resetGravity();
-	    
-	    frameArcade.updateScore(0);
-
-	    repaint(); // Pour rafraîchir l'affichage
-	}
-	
-	private void retournerMenu() {
-	    // Stopper le thread de jeu proprement
-	    running = false;
-	    // Fermer proprement la frame contenant ce GamePanel
-	    if (frameArcade != null) {
-	        frameArcade.dispose(); // Ferme la FrameArcade proprement
-	    } else {
-	        // Sécurité : on ferme le parent au cas où
-	        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-	        if (topFrame != null) {
-	            topFrame.dispose();
-	        }
-	    }
-
-	    // Ouvre le menu principal
-	    FrameMenuTest menu = new FrameMenuTest();
-	    menu.setVisible(true);
-	}
-	
-	
-	
 }
 
 

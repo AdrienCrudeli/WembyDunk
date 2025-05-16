@@ -25,7 +25,7 @@ public class FrameParametres extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        contentPane = new JPanelImageMenu("imageParametre2.png");
+        contentPane = new JPanelImageMenu("imageParametres.jpg");
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
@@ -79,7 +79,7 @@ public class FrameParametres extends JFrame {
 
     public void clicBoutonRetourMenu() {
         this.dispose();
-        FrameMenuTest obj = new FrameMenuTest();
-        obj.setVisible(true);
+        menu1ereVersion obj = new menu1ereVersion();
+        obj.main(null);
     }
 }

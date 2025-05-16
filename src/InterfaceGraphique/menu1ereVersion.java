@@ -49,7 +49,7 @@ public class menu1ereVersion extends JFrame {
 	public menu1ereVersion() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        contentPane = new JPanelImageMenu("imageMenu2.png"); 
+        contentPane = new JPanelImageMenu("unnamed.png"); 
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));

@@ -28,20 +28,13 @@ import java.awt.event.ActionEvent;
 
 public class JPanelDessin extends JPanel {
 	BufferedImage playerImage;
-	double scalePlayer = 7.0;
-	double scaleBall = 15.0;
+	double scalePlayer = 5.0;
+	double scaleBall = 10.0;
 	double scaleHoop = 16.0;
-	
 	BufferedImage[] playerImages = new BufferedImage[4];
 	int currentFrame = 0;
 	int frameCounter = 0;
 	int frameDelay = 10; 
-	
-	BufferedImage[] playerShootImages = new BufferedImage[3];  
-	String playerState = "IDLE"; 
-	int shootFrame = 0;
-	int shootFrameCounter = 0;
-	int shootFrameDelay = 8;
 	
 	BufferedImage ballImage;
 	BufferedImage backgroundImage;
@@ -70,9 +63,6 @@ public class JPanelDessin extends JPanel {
 		    	playerImages[1] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG2.png"));
 		    	playerImages[2] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG3.png"));
 		    	playerImages[3] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG4.png"));
-		    	playerShootImages[0] = ImageIO.read(getClass().getResource("/sprite/ATKStand1.png"));
-		        playerShootImages[1] = ImageIO.read(getClass().getResource("/sprite/ATKStand2.png"));
-		        playerShootImages[2] = ImageIO.read(getClass().getResource("/sprite/ATKStand3.png"));
 		    	backgroundImage = ImageIO.read(getClass().getResource("/sprite/court1.png"));
 		    	hoopImage = ImageIO.read(getClass().getResource("/sprite/panier.png"));
 		    	ballImage = ImageIO.read(getClass().getResource("/sprite/Ball.png"));  // ton image de ballon
@@ -100,12 +90,12 @@ public class JPanelDessin extends JPanel {
 			toColor[0]=Color.white;
 			toColor[1]=Color.orange;
 			toColor[2]=Color.blue;
-			toFill[0]= (int) ((gp.getCalcul().taillePerso.getX()));
+			toFill[0]= (int) (gp.getCalcul().taillePerso.getX());
 			toFill[1]=(int) ((gp.getCalcul().taillePerso.getY())); 
-			toFill[2]=(int) ((gp.getCalcul().tailleBallon.getX()));
-			toFill[3]=(int) ((gp.getCalcul().tailleBallon.getY()));
-			toFill[4]=(int) ((gp.getCalcul().taillePanier.getX()));
-			toFill[5]=(int) ((gp.getCalcul().taillePanier.getY()));
+			toFill[2]=(int) (gp.getDiamètreBallon());
+			toFill[3]=(int)  (gp.getDiamètreBallon());
+			toFill[4]=(int) (gp.getLongueurPanier());
+			toFill[5]=(int) (gp.getLargeurPanier());
 			
 			
 			 if (gp.getJoueur1().getVecteurVitesse().getX() != 0 || gp.getJoueur1().getVecteurVitesse().getY() != 0) {
@@ -130,16 +120,13 @@ public class JPanelDessin extends JPanel {
 			 
 				/*g.setColor(toColor[1]);
 				g.fillRect((int)(toPaint[1].getX()*dx),(int) (toPaint[1].getY()*dy),(int) (toFill[2]*dx),(int) (toFill[3]*dy));*/
-				if (ballImage != null) {
+				if (gp.getBallonMoovset().isBallonFollowsPlayer()==false){
 				    g.drawImage(ballImage,
 				        (int)(toPaint[1].getX()*dx),
-				        (int)(toPaint[1].getY()*dy - toFill[3]*dy*(scaleBall - 1)),
-				        (int)(toFill[2]*dx*10),
-				        (int)(toFill[3]*dy*10),
+				        (int)(toPaint[1].getY()*dy),
+				        (int)(toFill[2]*dx),
+				        (int)(toFill[3]*dy),
 				        null);
-				} else {
-				    g.setColor(toColor[1]);
-				    g.fillRect((int)(toPaint[1].getX()*dx),(int) (toPaint[1].getY()*dy),(int) (toFill[2]*dx),(int) (toFill[3]*dy));
 				}
 				 
 			/*g.setColor(toColor[0]);
@@ -155,9 +142,9 @@ public class JPanelDessin extends JPanel {
 			if (playerImages[currentFrame] != null) {
 			    g.drawImage(playerImages[currentFrame],
 			        (int)(toPaint[0].getX()*dx),
-			        (int)(toPaint[0].getY()*dy - toFill[1]*dy*(scalePlayer - 1)),
-			        (int)(toFill[0]*dx*5),
-			        (int)(toFill[1]*dy*5),
+			        (int)(toPaint[0].getY()*dy),
+			        (int)(toFill[0]*dx),
+			        (int)(toFill[1]*dy),
 			        null);
 			}
 			
@@ -167,10 +154,10 @@ public class JPanelDessin extends JPanel {
 			
 			if (hoopImage != null) {
 			    g.drawImage(hoopImage,
-			        (int)(toPaint[2].getX()*dx - toFill[5]*dy*(scaleHoop - 1)),
+			        (int)(toPaint[2].getX()*dx),
 			        (int)(toPaint[2].getY()*dy),
-			        (int)(toFill[4]*dx*5),  // Tu peux aussi agrandir comme pour les autres si besoin
-			        (int)(toFill[5]*dy*35),
+			        (int)(toFill[4]*dx),  // Tu peux aussi agrandir comme pour les autres si besoin
+			        (int)(toFill[5]*dy),
 			        null);
 			} else {
 			    // Sécurité : si l'image ne se charge pas, on garde le carré bleu
