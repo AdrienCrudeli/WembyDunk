@@ -1,4 +1,5 @@
 package InterfaceGraphique;
+import javax.swing.SwingUtilities;
 import java.awt.EventQueue;
 
 
@@ -79,7 +80,7 @@ public class FrameArcade extends JFrame {
 	    scoreImageLabel = new JLabel(new javax.swing.ImageIcon("images/chiffre0.png"));
 	    scoreImageLabel.setBounds(50, 50, 100, 100); // taille et position
 	    layeredPane.add(scoreImageLabel, Integer.valueOf(1));
-	    
+	    SwingUtilities.invokeLater(() -> paint.requestFocusInWindow());
 		
 		JButton btnNewButton = new JButton(" ← ");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -94,8 +95,14 @@ public class FrameArcade extends JFrame {
 		gbc_btnNewButton.gridy = 0;
 		
 		paint.requestFocusInWindow();
+		gamearcade.requestFocusInWindow();
 
 		
+	}
+	public void requestFocusToGamePanel() {
+	    if (gamearcade != null) {
+	        gamearcade.requestFocusInWindow();
+	    }
 	}
 	
 	

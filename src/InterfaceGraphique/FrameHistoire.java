@@ -121,6 +121,7 @@ public class FrameHistoire extends JFrame {
     	    this.dispose(); // fermer la FrameHistoire
     	    FrameArcade arcadeFrame = new FrameArcade();
     	    arcadeFrame.setVisible(true);
+    	    arcadeFrame.requestFocusToGamePanel();
     	    return; // très important pour stopper la méthode ici
     	}
         ImageIcon icon = new ImageIcon(imagePaths[index]);
