@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public int charPosY = calcul.getInitCharPosY();
 	public int charVit = calcul.getInitVitChar(); 
 	public int jump = calcul.getInitSaut();
+	private InterfaceGraphique.FrameArcade frameArcade;
 	Vector nulle = new Vector(0,0);
 
 	public Vector gravity = calcul.getVecteurGravité();
@@ -85,8 +86,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 	////Code////////////////////////////////////////////////////////////////
 
-	public GamePanel(JPanelDessin dessin ) {
+	public GamePanel(JPanelDessin dessin, InterfaceGraphique.FrameArcade frameArcade) {
 		this.dessin=dessin;
+		this.frameArcade = frameArcade;
 		this.setFocusable(true); // Make the panel focusable
 		this.addKeyListener(keyH); // Add the KeyHandler as a key listener
 		this.dx = dessin.getDx();
@@ -248,6 +250,7 @@ public class GamePanel extends JPanel implements Runnable {
 			        2000
 			    );
 		    System.out.println(compteur1);
+		    frameArcade.updateScore(compteur1);
 		}
 
 
