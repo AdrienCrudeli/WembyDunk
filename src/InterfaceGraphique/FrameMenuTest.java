@@ -36,7 +36,7 @@ public class FrameMenuTest extends JFrame {
     	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        contentPane = new JPanelImageMenu("unnamed.png"); 
+        contentPane = new JPanelImageMenu("imageMenu2.png"); 
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
@@ -49,13 +49,13 @@ public class FrameMenuTest extends JFrame {
         innerPanel.setOpaque(false);
 
         JButton histoireButton = new JButton("HISTOIRE");
-        histoireButton.setIcon(new ImageIcon("images/imagebouttonmenu.jpg"));
+        histoireButton.setIcon(new ImageIcon("images/imageModeHistoire2.png"));
         histoireButton.setActionCommand("histoire");
         histoireButton.setBorderPainted(false);
         histoireButton.setPreferredSize(new Dimension(240, 100));
         histoireButton.setBackground(new Color(153, 0, 255));
         JButton arcadeButton = new JButton("ARCADE");
-        arcadeButton.setIcon(new ImageIcon("images/imagebouttonarcade.jpeg"));
+        arcadeButton.setIcon(new ImageIcon("images/imageModeArcade.png"));
         arcadeButton.setBorderPainted(false);
         arcadeButton.setPreferredSize(new Dimension(240, 100));
         arcadeButton.setBounds(new Rectangle(0, 0, 124, 127));
@@ -79,12 +79,29 @@ public class FrameMenuTest extends JFrame {
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setOpaque(false);
         bottomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        JButton parametreButton = new JButton("PARAMETRES");
+        
+        JButton parametreButton = new JButton();
+        parametreButton.setIcon(new ImageIcon("images/boutonParametres3.png"));
+        parametreButton.setBorderPainted(false);
+        parametreButton.setContentAreaFilled(false);
+        parametreButton.setFocusPainted(false);
+        parametreButton.setOpaque(false);
+        parametreButton.setPreferredSize(new Dimension(179, 87));
+        
+        
         JButton sonButton = new JButton("SON");
+        sonButton.setIcon(new ImageIcon("images/boutonSon.png"));
+        sonButton.setBorderPainted(false);
+        sonButton.setContentAreaFilled(false);
+        sonButton.setFocusPainted(false);
+        sonButton.setOpaque(false);
+        sonButton.setPreferredSize(new Dimension(100, 100));
+        
 
         parametreButton.setFont(new Font("Eras Bold ITC", Font.PLAIN, 14));
         sonButton.setFont(new Font("Eras Bold ITC", Font.PLAIN, 14));
 
+                
         bottomPanel.add(parametreButton, BorderLayout.WEST);
         bottomPanel.add(sonButton, BorderLayout.EAST);
         contentPane.add(bottomPanel, BorderLayout.SOUTH);

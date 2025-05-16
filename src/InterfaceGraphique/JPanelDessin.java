@@ -28,13 +28,20 @@ import java.awt.event.ActionEvent;
 
 public class JPanelDessin extends JPanel {
 	BufferedImage playerImage;
-	double scalePlayer = 5.0;
-	double scaleBall = 10.0;
+	double scalePlayer = 7.0;
+	double scaleBall = 15.0;
 	double scaleHoop = 16.0;
+	
 	BufferedImage[] playerImages = new BufferedImage[4];
 	int currentFrame = 0;
 	int frameCounter = 0;
 	int frameDelay = 10; 
+	
+	BufferedImage[] playerShootImages = new BufferedImage[3];  
+	String playerState = "IDLE"; 
+	int shootFrame = 0;
+	int shootFrameCounter = 0;
+	int shootFrameDelay = 8;
 	
 	BufferedImage ballImage;
 	BufferedImage backgroundImage;
@@ -63,6 +70,9 @@ public class JPanelDessin extends JPanel {
 		    	playerImages[1] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG2.png"));
 		    	playerImages[2] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG3.png"));
 		    	playerImages[3] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG4.png"));
+		    	playerShootImages[0] = ImageIO.read(getClass().getResource("/sprite/ATKStand1.png"));
+		        playerShootImages[1] = ImageIO.read(getClass().getResource("/sprite/ATKStand2.png"));
+		        playerShootImages[2] = ImageIO.read(getClass().getResource("/sprite/ATKStand3.png"));
 		    	backgroundImage = ImageIO.read(getClass().getResource("/sprite/court1.png"));
 		    	hoopImage = ImageIO.read(getClass().getResource("/sprite/panier.png"));
 		    	ballImage = ImageIO.read(getClass().getResource("/sprite/Ball.png"));  // ton image de ballon
@@ -124,8 +134,8 @@ public class JPanelDessin extends JPanel {
 				    g.drawImage(ballImage,
 				        (int)(toPaint[1].getX()*dx),
 				        (int)(toPaint[1].getY()*dy - toFill[3]*dy*(scaleBall - 1)),
-				        (int)(toFill[2]*dx*8),
-				        (int)(toFill[3]*dy*8),
+				        (int)(toFill[2]*dx*10),
+				        (int)(toFill[3]*dy*10),
 				        null);
 				} else {
 				    g.setColor(toColor[1]);
@@ -146,8 +156,8 @@ public class JPanelDessin extends JPanel {
 			    g.drawImage(playerImages[currentFrame],
 			        (int)(toPaint[0].getX()*dx),
 			        (int)(toPaint[0].getY()*dy - toFill[1]*dy*(scalePlayer - 1)),
-			        (int)(toFill[0]*dx*3),
-			        (int)(toFill[1]*dy*3),
+			        (int)(toFill[0]*dx*5),
+			        (int)(toFill[1]*dy*5),
 			        null);
 			}
 			

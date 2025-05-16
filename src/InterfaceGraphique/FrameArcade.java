@@ -46,7 +46,7 @@ public class FrameArcade extends JFrame {
 	 * Create the frame.
 	 */
 	public FrameArcade() {
-		setSize(new Dimension(500, 300));
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	    paint = new JPanelDessin();
