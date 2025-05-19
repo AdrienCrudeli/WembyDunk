@@ -21,7 +21,7 @@ public class FrameHistoire extends JFrame {
     private JButton menuButton;
     private int index = 0;
 
-    private String[] imagePaths = {"images/image1modehistoire.png", "images/image2modehistoire.png", "images/image3modehistoire.png"};
+    private String[] imagePaths = {"images/imageHistoire1.png", "images/imageHistoire2.png", "images/imageHistoire3.png"};
     private String[] texts = {
         "Depuis tout petit, je passe mes journées à dribbler sur le bitume.\nChaque lancer est un pas de plus vers mon rêve : devenir un grand joueur de basket.\nInspiré par les légendes du jeu, je sais que le chemin sera long… mais je suis prêt à tout donner.",
         "Un jour, alors que je joue un match intense sur mon terrain habituel,\nun recruteur me remarque. « Tu as du potentiel », me dit-il.\nUne invitation à un camp d’entraînement de jeunes talents change tout. C’est ma chance de prouver que j'ai ma place parmi les meilleurs.",
@@ -67,19 +67,34 @@ public class FrameHistoire extends JFrame {
         panel.add(textArea, BorderLayout.SOUTH);
 
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        menuButton = new JButton("←");
+        menuButton = new JButton("");
+        menuButton.setIcon(new ImageIcon("images/boutonRetour.png"));
+        menuButton.setBorderPainted(false);
+        menuButton.setPreferredSize(new Dimension(119, 54));
+        
+        
+        
         menuButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		clicBoutonRetourMenu();
         	}
         });
-        menuButton.setPreferredSize(new Dimension(120, 30));
+        
         topPanel.add(menuButton);
         contentPane.add(topPanel, BorderLayout.NORTH);
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.setOpaque(false);
+        
         nextButton = new JButton("Suivant");
-        nextButton.setPreferredSize(new Dimension(120, 30));
+        nextButton.setIcon(new ImageIcon("images/boutonSuivant.png"));
+        nextButton.setBorderPainted(false);
+        nextButton.setPreferredSize(new Dimension(119, 54));
+        nextButton.setBounds(new Rectangle(0, 0, 124, 127));
+        
+        
+
+        
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 afficherImageSuivante();
