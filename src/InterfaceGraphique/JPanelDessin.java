@@ -28,10 +28,9 @@ import java.awt.event.ActionEvent;
 
 public class JPanelDessin extends JPanel {
 	BufferedImage playerImage;
-	double scalePlayer = 5.0;
-	double scaleBall = 10.0;
-	double scaleHoop = 16.0;
-	BufferedImage[] playerImages = new BufferedImage[4];
+	BufferedImage[] playerImagesRight = new BufferedImage[4];
+	BufferedImage[] playerImagesLeft = new BufferedImage[4];
+
 	int currentFrame = 0;
 	int frameCounter = 0;
 	int frameDelay = 10; 
@@ -44,7 +43,6 @@ public class JPanelDessin extends JPanel {
 	public Color[]  toColor = new Color[3];
 	public GamePanel gp ;
 	public int[] toFill = new int[6];
-	public String[] name = new String[3];
 	public KeyHandler keyH;
 	double dx=1;
 	double dy=1;
@@ -58,32 +56,25 @@ public class JPanelDessin extends JPanel {
 	public JPanelDessin () {
 		 this.setBackground(Color.black);
 		    this.setFocusable(true);
-		    try {
-		    	playerImages[0] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG1.png"));
-		    	playerImages[1] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG2.png"));
-		    	playerImages[2] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG3.png"));
-		    	playerImages[3] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG4.png"));
+		    try {//assignations des images aux variables
+		    	playerImagesRight[0] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG1.png"));
+		    	playerImagesRight[1] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG2.png"));
+		    	playerImagesRight[2] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG3.png"));
+		    	playerImagesRight[3] = ImageIO.read(getClass().getResource("/sprite/AtkDribbleRunG4.png"));
 		    	backgroundImage = ImageIO.read(getClass().getResource("/sprite/court1.png"));
 		    	hoopImage = ImageIO.read(getClass().getResource("/sprite/panier.png"));
 		    	ballImage = ImageIO.read(getClass().getResource("/sprite/Ball.png"));  // ton image de ballon
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }
-		/*this.setBackground(Color.black);
-		this.setFocusable(true);*/
 	}
 
 	protected void paintComponent(Graphics g) { //classe qui repaint //attention null
 		super.paintComponent(g); //classe parental
-		
-		this.setBackground(Color.black);
-		
-		if(gp!=null) {
-			setDx((double)this.getWidth()/gp.getCalcul().getScreenWidth());
+				
+		if(gp!=null) {//variables pour dessiner
+			setDx((double)this.getWidth()/gp.getCalcul().getScreenWidth()); //sert à resize les éléments en fonction de la taille de la fenêtre
 			setDy((double)this.getHeight()/gp.getCalcul().getScreenHeight());
-			name[0]="joueur";
-			name[1]="ballon";
-			name[2]="panier";
 			toPaint[0]=gp.getJoueur1().getVecteurPosition(); 
 			toPaint[1]=gp.getBallon().getVecteurPosition();
 			toPaint[2]=gp.getPanier().getVecteurPosition();
@@ -98,18 +89,22 @@ public class JPanelDessin extends JPanel {
 			toFill[5]=(int) (gp.getLargeurPanier());
 			
 			
-			 if (gp.getJoueur1().getVecteurVitesse().getX() != 0 || gp.getJoueur1().getVecteurVitesse().getY() != 0) {
-		            // Il bouge : on fait défiler les frames
+			 if (gp.getJoueur1Moovset().isMoovRight()) {
+		            // Il bouge à droite : on fait défiler les frames pour courir à droite
 		            frameCounter++;
 		            if (frameCounter >= frameDelay) {
-		                currentFrame = (currentFrame + 1) % playerImages.length;
+		                currentFrame = (currentFrame + 1) % playerImagesRight.length;
 		                frameCounter = 0;
 		            }
-		        } else {
-		            // Il est à l'arrêt : on affiche toujours la première image
-		            currentFrame = 0;
-		        }
-			 
+		            
+		            else if (gp.getJoueur1Moovset().isMoovLeft())        {
+			            // Il bouge à gauche : on fait défiler les frames pour courir à gauche
+		            	if (frameCounter >= frameDelay) {
+			                currentFrame = (currentFrame + 1) % playerImagesLeft.length;
+			                frameCounter = 0;
+			            }	
+		            }
+			 }
 			 if (backgroundImage != null) {
 				    g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), null);
 				} else {
@@ -118,8 +113,7 @@ public class JPanelDessin extends JPanel {
 				    g.fillRect(0, 0, this.getWidth(), this.getHeight());
 				}
 			 
-				/*g.setColor(toColor[1]);
-				g.fillRect((int)(toPaint[1].getX()*dx),(int) (toPaint[1].getY()*dy),(int) (toFill[2]*dx),(int) (toFill[3]*dy));*/
+				
 				if (gp.getBallonMoovset().isBallonFollowsPlayer()==false){
 				    g.drawImage(ballImage,
 				        (int)(toPaint[1].getX()*dx),
@@ -128,19 +122,10 @@ public class JPanelDessin extends JPanel {
 				        (int)(toFill[3]*dy),
 				        null);
 				}
-				 
-			/*g.setColor(toColor[0]);
-			g.fillRect((int)(toPaint[0].getX()*dx),(int) (toPaint[0].getY()*dy),(int) (toFill[0]*dx),(int) (toFill[1]*dy));*/
+
 			
-			/*g.drawImage(playerImage,
-				    (int)(toPaint[0].getX()*dx),
-				    (int)(toPaint[0].getY()*dy),
-				    (int)(toFill[0]*dx),
-				    (int)(toFill[1]*dy),
-				    null);*/
-			
-			if (playerImages[currentFrame] != null) {
-			    g.drawImage(playerImages[currentFrame],
+			if (playerImagesRight[currentFrame] != null) {
+			    g.drawImage(playerImagesRight[currentFrame],
 			        (int)(toPaint[0].getX()*dx),
 			        (int)(toPaint[0].getY()*dy),
 			        (int)(toFill[0]*dx),
@@ -149,18 +134,16 @@ public class JPanelDessin extends JPanel {
 			}
 			
 
-			/*g.setColor(toColor[2]);
-			g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),(int) (toFill[4]*dx),(int) (toFill[5]*dy));*/
 			
 			if (hoopImage != null) {
 			    g.drawImage(hoopImage,
 			        (int)(toPaint[2].getX()*dx),
 			        (int)(toPaint[2].getY()*dy),
-			        (int)(toFill[4]*dx),  // Tu peux aussi agrandir comme pour les autres si besoin
+			        (int)(toFill[4]*dx), 
 			        (int)(toFill[5]*dy),
 			        null);
 			} else {
-			    // Sécurité : si l'image ne se charge pas, on garde le carré bleu
+			    // Sécurité : si l'image ne se charge pas, on affiche un carré bleu
 			    g.setColor(toColor[2]);
 			    g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),(int) (toFill[4]*dx),(int) (toFill[5]*dy));
 			}
@@ -176,8 +159,9 @@ public class JPanelDessin extends JPanel {
 			
 			g2.dispose();
 			
+			 }
 		}
-	}
+	
 	public double getDx() {
 		return dx;
 	}

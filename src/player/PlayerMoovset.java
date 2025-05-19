@@ -5,6 +5,8 @@ import Calculator.Vector;
 public class PlayerMoovset {
 	Controller calcul = new Controller();
 	public boolean injump = false;
+	public boolean moovRight = false;
+	public boolean moovLeft = false;
 	public PlayerData joueur;
 	public double diviseur=1;
 
@@ -17,6 +19,8 @@ public class PlayerMoovset {
 		int pivot = (int) Math.round(-joueur.charVit/diviseur);
 		joueur.setVecteurVitesse(pivot,0);
 		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.vecteurVitesse));
+		moovRight = false;
+		moovLeft = true;
 
 	}
 
@@ -30,6 +34,9 @@ public class PlayerMoovset {
 		int pivot = (int) Math.round(joueur.charVit/diviseur);
 		joueur.setVecteurVitesse(pivot,0);
 		joueur.setVecteurPosition(joueur.getVecteurPosition().addition(joueur.vecteurVitesse));
+		moovRight = true;
+		moovLeft = false;
+
 	}
 
 	public void jumpCondition() {
@@ -54,10 +61,28 @@ public class PlayerMoovset {
 	}
 
 	//assesseurs 
+	
+	
 
 	public boolean isInjump() {
 		return injump;
 	}
+	public boolean isMoovRight() {
+		return moovRight;
+	}
+
+	public void setMoovRight(boolean moovRight) {
+		this.moovRight = moovRight;
+	}
+
+	public boolean isMoovLeft() {
+		return moovLeft;
+	}
+
+	public void setMoovLeft(boolean moovLeft) {
+		this.moovLeft = moovLeft;
+	}
+
 	public double getDiviseur() {
 		return diviseur;
 	}
