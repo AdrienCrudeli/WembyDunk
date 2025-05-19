@@ -25,7 +25,7 @@ public class FrameParametres extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        contentPane = new JPanelImageMenu("imageParametres.jpg");
+        contentPane = new JPanelImageMenu("imageParametre2.png");
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
@@ -33,7 +33,14 @@ public class FrameParametres extends JFrame {
         // Bouton retour menu en haut à gauche
         JPanel topLeftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topLeftPanel.setOpaque(false);
-        JButton btnNewButton = new JButton("←");
+        JButton btnNewButton = new JButton("");
+        btnNewButton.setIcon(new ImageIcon("images/boutonRetour.png"));
+        btnNewButton.setBorderPainted(false);
+        btnNewButton.setPreferredSize(new Dimension(119, 54));
+        
+        
+        
+        
         btnNewButton.addActionListener(e -> clicBoutonRetourMenu());
         topLeftPanel.add(btnNewButton);
         contentPane.add(topLeftPanel, BorderLayout.NORTH);
