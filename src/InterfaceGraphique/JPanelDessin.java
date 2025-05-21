@@ -34,7 +34,7 @@ public class JPanelDessin extends JPanel {
 	BufferedImage[] ATKDRST = new BufferedImage[4];
 	BufferedImage[] ATKSH = new BufferedImage[4];
 	BufferedImage[] ATKSHED = new BufferedImage[2];
-	BufferedImage[] ATKHB = new BufferedImage[2];
+	BufferedImage[] ATKHB = new BufferedImage[6];
 	BufferedImage[] ATKRUND = new BufferedImage[8];
 	BufferedImage[] ATKRUNG = new BufferedImage[8];
 	BufferedImage[] ATKST = new BufferedImage[8];
@@ -96,11 +96,16 @@ public void setKeyHandler(KeyHandler keyH){
 		    	ATKSH[1] = ImageIO.read(getClass().getResource("/sprite/AtkShotST2.png"));
 		    	ATKSH[2] = ImageIO.read(getClass().getResource("/sprite/AtkShotST3.png"));
 		    	ATKSH[3] = ImageIO.read(getClass().getResource("/sprite/AtkShotST4.png"));
+		    	
 		    	ATKSHED[0] = ImageIO.read(getClass().getResource("/sprite/AtkShotST5.png"));
 		    	ATKSHED[1] = ImageIO.read(getClass().getResource("/sprite/AtkShotST6.png"));
 		    	//images pour garder la balle dans les mains
 		    	ATKHB[0] = ImageIO.read(getClass().getResource("/sprite/AtkHBall1.png"));
-		    	ATKHB[1] = ImageIO.read(getClass().getResource("/sprite/AtkHBall2.png"));
+		    	ATKHB[1] = ImageIO.read(getClass().getResource("/sprite/AtkHBall1.png"));
+		    	ATKHB[2] = ImageIO.read(getClass().getResource("/sprite/AtkHBall1.png"));
+		    	ATKHB[3] = ImageIO.read(getClass().getResource("/sprite/AtkHBall2.png"));
+		    	ATKHB[4] = ImageIO.read(getClass().getResource("/sprite/AtkHBall2.png"));
+		    	ATKHB[5] = ImageIO.read(getClass().getResource("/sprite/AtkHBall2.png"));
 		    	//imges pour courir à droite sans la balle
 		    	ATKRUND[0] = ImageIO.read(getClass().getResource("/sprite/AtkRunD1.png"));
 		    	ATKRUND[1] = ImageIO.read(getClass().getResource("/sprite/AtkRunD2.png"));
