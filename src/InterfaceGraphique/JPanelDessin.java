@@ -32,7 +32,8 @@ public class JPanelDessin extends JPanel {
 	BufferedImage[] ATKDRG = new BufferedImage[8];
 	BufferedImage[] ATKDRD = new BufferedImage[8];
 	BufferedImage[] ATKDRST = new BufferedImage[4];
-	BufferedImage[] ATKSH = new BufferedImage[6];
+	BufferedImage[] ATKSH = new BufferedImage[4];
+	BufferedImage[] ATKSHED = new BufferedImage[2];
 	BufferedImage[] ATKHB = new BufferedImage[2];
 	BufferedImage[] ATKRUND = new BufferedImage[8];
 	BufferedImage[] ATKRUNG = new BufferedImage[8];
@@ -50,7 +51,7 @@ public class JPanelDessin extends JPanel {
 	public GamePanel gp ;
 	public int[] toFill = new int[6];
 	public String[] name = new String[3];
-	public KeyHandler keyH;
+	KeyHandler keyH = new KeyHandler();
 	double dx=1;
 	double dy=1;
 
@@ -96,8 +97,8 @@ public void setKeyHandler(KeyHandler keyH){
 		    	ATKSH[1] = ImageIO.read(getClass().getResource("/sprite/AtkShotST2.png"));
 		    	ATKSH[2] = ImageIO.read(getClass().getResource("/sprite/AtkShotST3.png"));
 		    	ATKSH[3] = ImageIO.read(getClass().getResource("/sprite/AtkShotST4.png"));
-		    	ATKSH[4] = ImageIO.read(getClass().getResource("/sprite/AtkShotST5.png"));
-		    	ATKSH[5] = ImageIO.read(getClass().getResource("/sprite/AtkShotST6.png"));
+		    	ATKSHED[0] = ImageIO.read(getClass().getResource("/sprite/AtkShotST5.png"));
+		    	ATKSHED[1] = ImageIO.read(getClass().getResource("/sprite/AtkShotST6.png"));
 		    	//images pour garder la balle dans les mains
 		    	ATKHB[0] = ImageIO.read(getClass().getResource("/sprite/AtkHBall1.png"));
 		    	ATKHB[1] = ImageIO.read(getClass().getResource("/sprite/AtkHBall2.png"));
@@ -168,26 +169,33 @@ public void setKeyHandler(KeyHandler keyH){
 				playerImage = ATKHB;
 				}
 			if(gp.getBallonMoovset().isBallonFollowsPlayer()==true) {
-				if(gp.getJoueur1Moovset().moovLeft == true) {//aller à gauche
+				if(gp.getJoueur1Moovset().isMoovLeft() == true) {//aller à gauche
 					playerImage = ATKDRG;
 					}
-				if (gp.getJoueur1Moovset().moovRight == true) {//aller à droite
+				if (gp.getJoueur1Moovset().isMoovRight() == true){//aller à droite
 					playerImage = ATKDRD;
 					}
-				/*if (keyH != null && !keyH.qPressed && !keyH.aPressed && !keyH.spacePressed && !keyH.dPressed){//si joueur pas bouger avec la balle
+				if(gp.getJoueur1Moovset().isInjump() == true) {
+					playerImage = ATKSH;
+				}
+				if(gp.getBallonMoovset().isballauch == true) {
+					playerImage = ATKSHED;
+				}
+				/*if (gp.getJoueur1Moovset().isMoovLeft() == false && gp.getJoueur1Moovset().isMoovRight() == false){//si joueur pas bouger avec la balle
 					playerImage = ATKDRST;
 					}*/
 				}
 			else if(gp.getBallonMoovset().isBallonFollowsPlayer()==false) {
+				gp.getBallonMoovset().isballauch = false;
 				if(gp.getJoueur1Moovset().moovLeft == true) {//aller à gauche
 					playerImage = ATKRUNG;
 					}
 				if (gp.getJoueur1Moovset().moovRight == true) {//aller à droite
 					playerImage = ATKRUND;
 					}
-				if(gp.getJoueur1Moovset().moovLeft == false && gp.getJoueur1Moovset().moovRight == false && gp.getJoueur1Moovset().injump == false) {//si joueur pas bouger avec la balle
+				/*if(gp.getJoueur1Moovset().moovLeft == false && gp.getJoueur1Moovset().moovRight == false && gp.getJoueur1Moovset().injump == false) {//si joueur pas bouger avec la balle
 					playerImage = ATKST;
-					}
+					}*/
 				}
 			 if (gp.getJoueur1().getVecteurVitesse().getX() != 0 || gp.getJoueur1().getVecteurVitesse().getY() != 0) {
 		            // Il bouge : on fait défiler les frames
