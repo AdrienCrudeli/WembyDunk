@@ -56,10 +56,12 @@ public class GamePanel extends JPanel implements Runnable {
 	public Vector accGravityBallon = calcul.getAccGravityBallon();
 
 	public Vector vecteurPositionPanier =calcul.getInitVecteurPositionPanier();
+	public Vector vecteurPositionArceau =calcul.getCentreArceau();
 	public int largeurPanier = calcul.getInitLargPanier();
 	public int longueurPanier = calcul.getInitLongeurPanier();
 	public int compteur1 = calcul.getInitCompteur() ;
 	public boolean isCounted = false;
+
 
 	double dx = 1;
 	double dy = 1;
@@ -234,8 +236,8 @@ public class GamePanel extends JPanel implements Runnable {
 			ballon.changeCollidedY();
 			ballonMoovset.getBallon().getTerrain().setVecteurGravitéBallon(ballonMoovset.getBallon().getTerrain().getVecteurGravitéBallon().lambda(uBallon));
 		}
-
-		if (ballon.getVecteurPosition().compare_intervalle(panier.getVecteurPosition(), 200,25) && isCounted == false) {
+		
+		if (ballon.getVecteurPosition().getX() <  vecteurPositionArceau.getX()-15*dx && ballon.getVecteurPosition().getX() >  vecteurPositionArceau.getX()-100*dx && ballon.getVecteurPosition().getY() <  vecteurPositionArceau.getY() + 20*dy && ballon.getVecteurPosition().getY() >  vecteurPositionArceau.getY()-20*dy  && isCounted == false) {
 		    compteur1 = compteur1 + 1;
 		    isCounted=true;
 		    new java.util.Timer().schedule( 

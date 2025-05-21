@@ -50,7 +50,6 @@ public class JPanelDessin extends JPanel {
 	public Color[]  toColor = new Color[3];
 	public GamePanel gp ;
 	public int[] toFill = new int[6];
-	public String[] name = new String[3];
 	KeyHandler keyH = new KeyHandler();
 	double dx=1;
 	double dy=1;
@@ -148,9 +147,6 @@ public void setKeyHandler(KeyHandler keyH){
 		if(gp!=null) {
 			setDx((double)this.getWidth()/gp.getCalcul().getScreenWidth());
 			setDy((double)this.getHeight()/gp.getCalcul().getScreenHeight());
-			name[0]="joueur";
-			name[1]="ballon";
-			name[2]="panier";
 			toPaint[0]=gp.getJoueur1().getVecteurPosition(); 
 			toPaint[1]=gp.getBallon().getVecteurPosition();
 			toPaint[2]=gp.getPanier().getVecteurPosition();
@@ -219,14 +215,7 @@ public void setKeyHandler(KeyHandler keyH){
 			 
 				/*g.setColor(toColor[1]);
 				g.fillRect((int)(toPaint[1].getX()*dx),(int) (toPaint[1].getY()*dy),(int) (toFill[2]*dx),(int) (toFill[3]*dy));*/
-				if (gp.getBallonMoovset().isBallonFollowsPlayer()==false){
-				    g.drawImage(ballImage,
-				        (int)(toPaint[1].getX()*dx),
-				        (int)(toPaint[1].getY()*dy),
-				        (int)(toFill[2]*dx),
-				        (int)(toFill[3]*dy),
-				        null);
-				}
+
 				
 				
 				
@@ -269,10 +258,16 @@ public void setKeyHandler(KeyHandler keyH){
 			    g.setColor(toColor[2]);
 			    g.fillRect((int)(toPaint[2].getX()*dx),(int) (toPaint[2].getY()*dy),(int) (toFill[4]*dx),(int) (toFill[5]*dy));
 			}
-		
-				
 			
-				
+			
+			if (gp.getBallonMoovset().isBallonFollowsPlayer()==false){
+			    g.drawImage(ballImage,
+			        (int)(toPaint[1].getX()*dx),
+			        (int)(toPaint[1].getY()*dy),
+			        (int)(toFill[2]*dx),
+			        (int)(toFill[3]*dy),
+			        null);
+			}	
 	
 			
 			

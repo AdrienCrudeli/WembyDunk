@@ -58,6 +58,7 @@ public class Controller{
 	public int initLongeurPanier = 200;
 	public Vector initVecteurPositionPanier = new Vector(screenWidth-250,400);
 	public int initCompteur = 0;
+	public Vector centreArceau = new Vector(getInitVecteurPositionPanier().getX() + 55, getInitVecteurPositionPanier().getY()+165);
 
 	//Calculs bruts
 
@@ -67,6 +68,12 @@ public class Controller{
 
 	public int getInitCompteur() {
 		return initCompteur;
+	}
+	public Vector getCentreArceau() {
+		return centreArceau;
+	}
+	public void setCentreArceau(Vector centreArceau) {
+		this.centreArceau = centreArceau;
 	}
 	public Vector getTaillePerso() {
 		return taillePerso;
