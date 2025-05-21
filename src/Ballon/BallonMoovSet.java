@@ -25,7 +25,8 @@ public class BallonMoovSet {
 	public double qProportion;
 
 	public boolean ballonFollowsPlayer=true;
-	public boolean isballauch = false;
+	public boolean ballauch = false;
+
 
 	public Vector force = new Vector(0,0);
 	public Vector forceInt = new Vector(0,0);
@@ -103,7 +104,7 @@ public class BallonMoovSet {
 	
 		forceInt.setX(forceAbsInt);
 		forceInt.setY(forceOrdInt);
-		isballauch = true;
+		setBallauch(true);
 
 		deCharge();
 
@@ -154,7 +155,13 @@ public class BallonMoovSet {
 		forceOrd=0;
 
 	}
+	public boolean isBallauch() {
+		return ballauch;
+	}
 
+	public void setBallauch(boolean ballauch) {
+		this.ballauch = ballauch;
+	}
 
 	public Vector getForce() {
 		return force;

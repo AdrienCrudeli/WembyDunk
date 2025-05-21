@@ -178,7 +178,7 @@ public void setKeyHandler(KeyHandler keyH){
 				if(gp.getJoueur1Moovset().isInjump() == true) {
 					playerImage = ATKSH;
 				}
-				if(gp.getBallonMoovset().isballauch == true) {
+				if(gp.getBallonMoovset().isBallauch() ==true) {
 					playerImage = ATKSHED;
 				}
 				/*if (gp.getJoueur1Moovset().isMoovLeft() == false && gp.getJoueur1Moovset().isMoovRight() == false){//si joueur pas bouger avec la balle
@@ -186,7 +186,7 @@ public void setKeyHandler(KeyHandler keyH){
 					}*/
 				}
 			else if(gp.getBallonMoovset().isBallonFollowsPlayer()==false) {
-				gp.getBallonMoovset().isballauch = false;
+				gp.getBallonMoovset().setBallauch(false);
 				if(gp.getJoueur1Moovset().moovLeft == true) {//aller à gauche
 					playerImage = ATKRUNG;
 					}
