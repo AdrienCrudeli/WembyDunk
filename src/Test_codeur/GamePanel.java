@@ -237,7 +237,7 @@ public class GamePanel extends JPanel implements Runnable {
 			ballonMoovset.getBallon().getTerrain().setVecteurGravitéBallon(ballonMoovset.getBallon().getTerrain().getVecteurGravitéBallon().lambda(uBallon));
 		}
 		
-		if (ballon.getVecteurPosition().getX() <  vecteurPositionArceau.getX()+20*dx && ballon.getVecteurPosition().getX() >  vecteurPositionArceau.getX()-80*dx && ballon.getVecteurPosition().getY() <  vecteurPositionArceau.getY() + 20*dy && ballon.getVecteurPosition().getY() >  vecteurPositionArceau.getY()-20*dy  && isCounted == false) {
+		if (ballon.getVecteurPosition().getX() <  vecteurPositionArceau.getX()+10*dx && ballon.getVecteurPosition().getX() >  vecteurPositionArceau.getX()-80*dx && ballon.getVecteurPosition().getY() <  vecteurPositionArceau.getY() + 120*dy && ballon.getVecteurPosition().getY() >  vecteurPositionArceau.getY()+80*dy  && isCounted == false) {
 		    compteur1++;
 		    isCounted = true;
 
