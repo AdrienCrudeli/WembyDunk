@@ -28,14 +28,14 @@ public class Controller{
 	public int initSaut = 60;
 	public int accJump=5;
 	public double dividedVit = 1; //vitesse diviseur dans le saut
-	public Vector taillePerso = new Vector(50,50);
+	public Vector taillePerso = new Vector(200,200);
 
 	//paramètre Ballon/////////////////////////////////////////////////////////////////////////////////////
 
 	public Vector initVecteurPositionBallon = new Vector(0,0);
 	public int initVit = 0;
 	public double initMhu = 0.03;
-	public double initDiameter = 150;
+	public double initDiameter = 300;
 	public ImageIcon imageBallon = new ImageIcon("Ballon.png");
 	public int initForceMax = 100;
 	public int gravitéBallon = 10;
@@ -256,6 +256,15 @@ public class Controller{
 	}
 	public int getScreenHeight() {
 		return screenHeight;
+	}
+	
+	// Correction verticale du joueur pour affichage (centre bas du sprite au sol)
+	public double getYOffsetForPlayerDrawing() {
+	    return taillePerso.getY() / 0.75; 
+	}
+	// Décalage vertical pour afficher la balle correctement
+	public double getYOffsetForBallDrawing() {
+	    return initDiameter / 1.25; 
 	}
 
 }

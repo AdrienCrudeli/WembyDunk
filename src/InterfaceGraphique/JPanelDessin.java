@@ -159,7 +159,7 @@ public void setKeyHandler(KeyHandler keyH){
 			toColor[1]=Color.orange;
 			toColor[2]=Color.blue;
 			toFill[0]= (int) (gp.getCalcul().taillePerso.getX());
-			toFill[1]=(int) ((gp.getCalcul().taillePerso.getY())); 
+			toFill[1]=(int) ((gp.getCalcul().taillePerso.getY()));
 			toFill[2]=(int) (gp.getDiamètreBallon());
 			toFill[3]=(int)  (gp.getDiamètreBallon());
 			toFill[4]=(int) (gp.getLongueurPanier());
@@ -241,7 +241,7 @@ public void setKeyHandler(KeyHandler keyH){
 			if (playerImage[currentFrame] != null) {
 			    g.drawImage(playerImage[currentFrame],
 			        (int)(toPaint[0].getX()*dx),
-			        (int)(toPaint[0].getY()*dy),
+			        (int)((toPaint[0].getY() - gp.getCalcul().getYOffsetForPlayerDrawing()) * dy),
 			        (int)(toFill[0]*dx),
 			        (int)(toFill[1]*dy),
 			        null);
@@ -268,7 +268,7 @@ public void setKeyHandler(KeyHandler keyH){
 			if (gp.getBallonMoovset().isBallonFollowsPlayer()==false){
 			    g.drawImage(ballImage,
 			        (int)(toPaint[1].getX()*dx),
-			        (int)(toPaint[1].getY()*dy),
+			        (int)((toPaint[1].getY() - gp.getCalcul().getYOffsetForBallDrawing()) * dy),
 			        (int)(toFill[2]*dx),
 			        (int)(toFill[3]*dy),
 			        null);

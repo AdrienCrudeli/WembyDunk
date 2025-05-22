@@ -80,7 +80,9 @@ public class FrameMenuTest extends JFrame {
         bottomPanel.setOpaque(false);
         bottomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         JButton parametreButton = new JButton("");
+        
         parametreButton.setIcon(new ImageIcon("images/boutonParametres3.png"));
+        
         parametreButton.setBorderPainted(false);
         parametreButton.setPreferredSize(new Dimension(180, 50));
         parametreButton.setBounds(new Rectangle(0, 0, 124, 127));
