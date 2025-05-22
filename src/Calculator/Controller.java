@@ -35,7 +35,7 @@ public class Controller{
 	public Vector initVecteurPositionBallon = new Vector(0,0);
 	public int initVit = 0;
 	public double initMhu = 0.03;
-	public double initDiameter = 300;
+	public double initDiameter = 200;
 	public ImageIcon imageBallon = new ImageIcon("Ballon.png");
 	public int initForceMax = 100;
 	public int gravitéBallon = 10;
@@ -54,9 +54,9 @@ public class Controller{
 
 	//Paramètre panier/////////////////////////////////////////////////////////////////////////////////////
 
-	public int initLargPanier = 500;
-	public int initLongeurPanier = 200;
-	public Vector initVecteurPositionPanier = new Vector(screenWidth-250,400);
+	public int initLargPanier = 700;
+	public int initLongeurPanier = 400;
+	public Vector initVecteurPositionPanier = new Vector(screenWidth-400,220);
 	public int initCompteur = 0;
 	public Vector centreArceau = new Vector(getInitVecteurPositionPanier().getX() + 55, getInitVecteurPositionPanier().getY()+165);
 

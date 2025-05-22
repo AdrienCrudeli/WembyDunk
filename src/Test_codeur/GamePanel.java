@@ -237,19 +237,21 @@ public class GamePanel extends JPanel implements Runnable {
 			ballonMoovset.getBallon().getTerrain().setVecteurGravitéBallon(ballonMoovset.getBallon().getTerrain().getVecteurGravitéBallon().lambda(uBallon));
 		}
 		
-		if (ballon.getVecteurPosition().getX() <  vecteurPositionArceau.getX()-15*dx && ballon.getVecteurPosition().getX() >  vecteurPositionArceau.getX()-100*dx && ballon.getVecteurPosition().getY() <  vecteurPositionArceau.getY() + 20*dy && ballon.getVecteurPosition().getY() >  vecteurPositionArceau.getY()-20*dy  && isCounted == false) {
-		    compteur1 = compteur1 + 1;
-		    isCounted=true;
-		    new java.util.Timer().schedule( 
-			        new java.util.TimerTask() {
-			            @Override
-			            public void run() {
-			    		    isCounted = false;
-			            }
-			        }, 
-			        2000
-			    );
-		    System.out.println(compteur1);
+		if (ballon.getVecteurPosition().getX() <  vecteurPositionArceau.getX()+20*dx && ballon.getVecteurPosition().getX() >  vecteurPositionArceau.getX()-80*dx && ballon.getVecteurPosition().getY() <  vecteurPositionArceau.getY() + 20*dy && ballon.getVecteurPosition().getY() >  vecteurPositionArceau.getY()-20*dy  && isCounted == false) {
+		    compteur1++;
+		    isCounted = true;
+
+		    System.out.println("Score : " + compteur1);
+		    System.out.println("Fin du jeu.");
+
+		    // Ferme la fenêtre principale (Swing)
+		    java.awt.Window[] windows = java.awt.Window.getWindows();
+		    for (java.awt.Window window : windows) {
+		        window.dispose();
+		    }
+
+		    // Arrête complètement le programme
+		    System.exit(0);
 		}
 
 
