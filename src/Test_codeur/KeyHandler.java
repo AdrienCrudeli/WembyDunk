@@ -8,7 +8,7 @@ public class KeyHandler implements KeyListener{
 @Override
 public void keyTyped(KeyEvent e) {
 }
-	public boolean zPressed, qPressed, sPressed,dPressed,spacePressed,spaceReleased,aPressed,aReleased,dReleased,sReleased,qReleased,zReleased;
+	public boolean zPressed, qPressed, sPressed,dPressed,spacePressed,spaceReleased,aPressed,aReleased,dReleased,sReleased,qReleased,zReleased,ePressed,eReleased;
 
 	public void keyPressed(KeyEvent e) {
 
@@ -40,6 +40,10 @@ public void keyTyped(KeyEvent e) {
 		if (keyCode == KeyEvent.VK_A) {
 			aPressed = true;
 			aReleased = false;
+		}
+		if (keyCode == KeyEvent.VK_E) {
+			ePressed = true;
+			eReleased = false;
 		}
 			
 	}
@@ -81,6 +85,10 @@ public void keyTyped(KeyEvent e) {
 		if (keyCode == KeyEvent.VK_A) {
 			aPressed = false;
 			aReleased =true;
+		}
+		if (keyCode == KeyEvent.VK_E) {
+			ePressed = false;
+			eReleased = true;
 		}
 	}
 

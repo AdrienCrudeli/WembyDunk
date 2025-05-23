@@ -203,6 +203,10 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 
 		//Partie Ballon
+		
+		if (keyH.ePressed) {
+			ballonMoovset.setBallonFollowsPlayer(true);
+		}
 
 
 
